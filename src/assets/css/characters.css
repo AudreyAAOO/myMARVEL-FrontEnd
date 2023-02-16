@@ -69,6 +69,7 @@ max-width: 200px;
 a {
     text-decoration: none; 
 }
+
 .containerDescription:hover {
 	border: 5px solid #32f8ff;
 	font-size: 15px;

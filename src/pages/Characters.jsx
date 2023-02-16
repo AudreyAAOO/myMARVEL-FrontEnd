@@ -50,13 +50,7 @@ const Characters = () => {
 										alt="personnage"
 									/>
 								</div>
-								{/* Si le vendeur a un avatar, je l'affiche
-          {data.owner.account.avatar ? (
-            <img src={data.owner.account.avatar.secure_url} alt="owner" />
-            // {/* Sinon je mets un avatar par défault */}
-								{/* ) : (
-            <img src={userEmptyState} alt="owner" />
-          )} */}
+							
 
 								<div className="containerDescription">
 									<p> {character.description}</p>
