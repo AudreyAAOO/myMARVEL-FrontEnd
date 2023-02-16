@@ -14,13 +14,13 @@ import Comics from "./pages/Comics";
 function App() {
   return (
     <Router>
-      {/* <Route path="/" element={<Header />} /> */}
+      {/* <Route path="/header" element={<Header />} /> */}
       <Routes>
         <Route path="/" element={<Characters />} />
-        <Route path="/" element={<Comics />} />
-        {/* <Route path="/" element={<Favorites />} /> */}
+        <Route path="/comics" element={<Comics />} />
+        {/* <Route path="/favorites" element={<Favorites />} /> */}
       </Routes>
-      {/* <Route path="/" element={<Footer />} /> */}
+      {/* <Route path="/footer" element={<Footer />} /> */}
     </Router>
   );
 }

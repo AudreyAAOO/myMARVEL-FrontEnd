@@ -8,6 +8,7 @@ import "../assets/css/characters.css";
 const Characters = () => {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
+	const [search, setSearch] = useState("");
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -31,35 +32,51 @@ const Characters = () => {
 				<img src={Marvel_Logo} alt="" />
 				<p>Bienvenue sur mon API Marvel</p>
 			</div>
-			<Link to={`/comics`}>
-				{" "}
-				{/* ${character._id} */}
-				<div className="charactersCard">
-					{data.results.map((character) => {
-						return (
-							<article key={character._id}>
-								<p>{character.name}</p>
+            <div className="menu">
+			<div className="search">
+				<input
+					value={search}
+					type="text"
+					placeholder="rechercher un personnage"
+					onChange={(event) => {
+						setSearch(event.target.value);
+					}}
+				/>
+			</div>
+			<div className="buttonsPages">
+				<button>page précédente</button>
+				<button>page suivante</button>
+			</div>
+</div>
+			{/* ${character._id} */}
+			<div className="charactersCard">
+				{data.results.map((character) => {
+					return (
+						<>
+							<Link to={`/Comics/${character._id}`}>
+								<article key={character._id}>
+									<p>{character.name}</p>
 
-								<div className="containerImg">
-									<img
-										src={
-											character.thumbnail.path +
-											"." +
-											character.thumbnail.extension
-										}
-										alt="personnage"
-									/>
-								</div>
-							
+									<div className="containerImg">
+										<img
+											src={
+												character.thumbnail.path +
+												"." +
+												character.thumbnail.extension
+											}
+											alt="personnage"
+										/>
+									</div>
 
-								<div className="containerDescription">
-									<p> {character.description}</p>
-								</div>
-							</article>
-						);
-					})}
-				</div>
-			</Link>
+									<div className="containerDescription">
+										<p> {character.description}</p>
+									</div>
+								</article>
+							</Link>
+						</>
+					);
+				})}
+			</div>
 		</div>
 	);
 };

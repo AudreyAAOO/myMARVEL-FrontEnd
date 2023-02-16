@@ -1,0 +1,10 @@
+.heroComics{
+	background-color: rgb(0, 0, 0);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	color: white;
+	font-size: 40px;
+}
