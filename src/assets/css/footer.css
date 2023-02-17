@@ -1,0 +1,21 @@
+.containerFooter {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	
+}
+
+.footer {
+	background-color: #ee171f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 70px;
+	width: 100vw;
+    font-weight: 900;
+}
+
+.footer > a:hover {
+
+color: rgb(6, 41, 183);
+} 

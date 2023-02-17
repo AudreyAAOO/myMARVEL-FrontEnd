@@ -1,25 +1,3 @@
-
-
-
-
-
-
-
-
-
-a {
-	text-decoration: none;
-	color: white;
-}
-
-
-/* barre de recherche et pagination */
-.menu {
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
 .search {
 	width: 280px;
 	height: 40px;
@@ -51,24 +29,4 @@ a {
 	background-color: rgb(6, 41, 183);
 	color: white;
 	cursor: pointer;
-}
-
-/* page 404 */
-.container_page404 {
-	height: 50vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	row-gap: 50px;
-	margin: 100px auto;
-	font-size: 30px;
-}
-.container_page404 > img{ 
-width: 200px;
-
-}
-.link-home {
-	display: flex;
-	justify-content: center;
 }

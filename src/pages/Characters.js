@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Marvel_Logo from "../assets/img/Marvel_Logo.png";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/css/characters.css";
+
+// import des composants
+// import Button from "../components/Button";
 
 const Characters = () => {
 	const [data, setData] = useState();
@@ -13,7 +16,7 @@ const Characters = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get("http://localhost:3100/characters");
+				const response = await axios.get("https://site--mymarvel--hw4gvwsxlwd5.code.run/characters");
 				// console.log(response.data);
 				setData(response.data);
 				setIsLoading(false);
@@ -24,6 +27,13 @@ const Characters = () => {
 		fetchData();
 	}, []);
 
+	// const nextPage = () => {
+	// 	console.log("next");
+	// }
+	// const prevPage = () => {
+	// 	console.log("previous");
+	// }
+
 	return isLoading ? (
 		<p>Loading ...!</p>
 	) : (
@@ -32,35 +42,44 @@ const Characters = () => {
 				<img src={Marvel_Logo} alt="" />
 				<p>Bienvenue sur mon API Marvel</p>
 			</div>
-            <div className="menu">
-			<div className="search">
-				<input
-					value={search}
-					type="text"
-					placeholder="rechercher un personnage"
-					onChange={(event) => {
-						setSearch(event.target.value);
-					}}
-				/>
+			<div className="menu">
+				<div className="search">
+					<input
+						value={search}
+						type="text"
+						placeholder="rechercher un personnage"
+						onChange={(event) => {
+							console.log(event.target.value);
+							setSearch(event.target.value);
+						}}
+					></input>
+				</div>
+				<div className="buttonsPages">
+
+					{/* <Button actionClick={() => prevPage()} /> */}
+					{/* <button>page précédente</button>*/}
+					{/*<button>page suivante</button> */}
+
+					{/* //todo voir cours sur le formulaire publish, comment on a camouflé le button files */}
+					{/* <button>page suivante<Button actionClick={() => nextPage()} name="eeerr" value="sdbfsdjkfb" /></button> */}
+
+				</div>
 			</div>
-			<div className="buttonsPages">
-				<button>page précédente</button>
-				<button>page suivante</button>
-			</div>
-</div>
 			{/* ${character._id} */}
 			<div className="charactersCard">
 				{data.results.map((character) => {
 					return (
 						<>
+							{/* //! ou /character/${character._id} */}
 							<Link to={`/Comics/${character._id}`}>
 								<article key={character._id}>
-									<p>{character.name}</p>
+									<h2>{character.name}</h2>
 
 									<div className="containerImg">
 										<img
 											src={
 												character.thumbnail.path +
+												"/standard_xlarge" +
 												"." +
 												character.thumbnail.extension
 											}
@@ -70,6 +89,7 @@ const Characters = () => {
 
 									<div className="containerDescription">
 										<p> {character.description}</p>
+										<FontAwesomeIcon icon={["far", "heart"]} />
 									</div>
 								</article>
 							</Link>

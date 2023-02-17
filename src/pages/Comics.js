@@ -19,7 +19,7 @@ const Comics = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
-					`https://lereacteur-marvel-api.herokuapp.com/comics/${id}`
+					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics/${id}`
 				);
 				console.log("(*＾▽＾)／ response.data: ", response.data);
 				// Je stocke le résultat dans data
@@ -39,6 +39,7 @@ const Comics = () => {
 			<div className="heroComics">
 				<img src={Marvel_Logo} alt="" />
 				<p>Comics</p>
+                <Link to={"/"}>retourner sur la page d'accueil</Link>
 			</div>
 		</>
 	);
