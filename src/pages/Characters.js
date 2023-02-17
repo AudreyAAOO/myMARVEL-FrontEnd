@@ -21,7 +21,7 @@ const Characters = () => {
 				setData(response.data);
 				setIsLoading(false);
 			} catch (error) {
-				console.log(error);
+				console.log(error.response);
 			}
 		};
 		fetchData();
@@ -57,20 +57,20 @@ const Characters = () => {
 				<div className="buttonsPages">
 
 					{/* <Button actionClick={() => prevPage()} /> */}
-					{/* <button>page précédente</button>*/}
-					{/*<button>page suivante</button> */}
+					<button>page précédente</button>
+					<button>page suivante</button>
 
 					{/* //todo voir cours sur le formulaire publish, comment on a camouflé le button files */}
 					{/* <button>page suivante<Button actionClick={() => nextPage()} name="eeerr" value="sdbfsdjkfb" /></button> */}
 
 				</div>
 			</div>
-			{/* ${character._id} */}
+
 			<div className="charactersCard">
 				{data.results.map((character) => {
 					return (
 						<>
-							{/* //! ou /character/${character._id} */}
+
 							<Link to={`/Comics/${character._id}`}>
 								<article key={character._id}>
 									<h2>{character.name}</h2>
