@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/css/characters.css";
 
 // import des composants
-// import Button from "../components/Button";
+import Button from "../components/Button";
 
 const Characters = () => {
 	const [data, setData] = useState();
@@ -27,12 +27,12 @@ const Characters = () => {
 		fetchData();
 	}, []);
 
-	// const nextPage = () => {
-	// 	console.log("next");
-	// }
-	// const prevPage = () => {
-	// 	console.log("previous");
-	// }
+	const nextPage = () => {
+		console.log("next");
+	}
+	const prevPage = () => {
+		console.log("previous");
+	}
 
 	return isLoading ? (
 		<p>Loading ...!</p>
@@ -61,7 +61,7 @@ const Characters = () => {
 					<button>page suivante</button>
 
 					{/* //todo voir cours sur le formulaire publish, comment on a camouflé le button files */}
-					{/* <button>page suivante<Button actionClick={() => nextPage()} name="eeerr" value="sdbfsdjkfb" /></button> */}
+					<Button actionClick={() => nextPage()} name="eeerr" value="sdbfsdjkfb" />
 
 				</div>
 			</div>

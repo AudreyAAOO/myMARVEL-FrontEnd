@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import "../assets/css/button.css";
 
-const Button = ({ actionClick, action }) => {
-	return <button onClick={actionClick}>{action.name}</button>;
+const Button = ({ actionClick, action, name }) => {
+	return <button onClick={actionClick}>{name}</button>;
 };
 
 export default Button;
