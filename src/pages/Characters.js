@@ -17,14 +17,15 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 	const [searchC, setSearchC] = useState("");
 	const navigate = useNavigate();
 
-	let displayImg = (character) => { return character.thumbnail.path + "/standard_xlarge" + "." + character.thumbnail.extension };
 
 
 	useEffect(() => {
+		// const limit = 100;
+		// const skip = 0;
 		// &skip=${skip}&limit=${limit}
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}`);
+				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}&skip=${skip}&limit=${limit}`);
 				// console.log(response.data);
 				setData(response.data);
 				setIsLoading(false);
@@ -33,8 +34,9 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 			}
 		};
 		fetchData();
-	}, [searchC]);
-	// , skip, limit
+	}, [searchC, skip, limit]);
+	// 
+	let displayImg = (character) => { return character.thumbnail.path + "/standard_xlarge" + "." + character.thumbnail.extension };
 
 	const research = (e) => {
 		console.log(e.target.value);
@@ -43,12 +45,18 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 
 	const nextPage = () => {
 		setSkip(skip + limit);
+		// const copy = [...data.results];
+		// copy[index]++;
+		// setSkip(skip + limit);
 		// `characters?skip=${skip}&limit=${limit}
 		// navigate(`/`);
 	}
 
 	const prevPage = () => {
-		setSkip(skip - limit);
+		if ((skip - limit) > -1) { // 100 - 100  = 0 > -1  
+			setSkip(skip - limit);
+		}
+
 	}
 
 
@@ -78,42 +86,53 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 
 					{/* voir cours sur le formulaire publish, comment on a camouflé le button files */}
 
-					<Button className="btnPrev" actionClick={() => prevPage()} name="page précédente" value="page précédente" />
-					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="page suivante" />
-
+					<Button className={skip !== 1 ? "btnPrev" : "noBtn"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="" />
+					{/* className={skip > 1 ? "btnNext" : "noBtn"} */}
 				</div>
 			</div>
 
-			<div className="charactersCard">
-				{data.results.map((character) => {
-					return (
-						<>
-							{/* {`/Characters/${character._id}                   */}
-							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-								<article key={character._id}>
-									<h2>{character.name}</h2>
+			{data.results.map((character) => {
+				return (<>
 
-									<div className="containerImg">
-										<img
-											src={displayImg(character)}
-											alt="personnage"
-										/>
+					<div className="charactersCard">
+						{/* {data.results.map((character, index) => {
+								return (
+						<> */}
+						{/* {`/Characters/${character._id}                   */}
+						<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-									</div>
+							<article key={character._id}>
+								<h2>{character.name}</h2>
 
-									<div className="containerDescription">
-										<p> {character.description}</p>
-										<FontAwesomeIcon icon={["far", "heart"]} />
-									</div>
-								</article>
-							</Link>
-						</>
-					);
-				})}
-			</div>
-		</div >
-	</>);
+								<div className="containerImg">
+									<img
+										src={displayImg(character)}
+										alt="personnage"
+									/>
+
+								</div>
+
+								<div className="containerDescription">
+									<p> {character.description}</p>
+									<FontAwesomeIcon icon={["far", "heart"]} />
+								</div>
+							</article>
+						</Link>
+					</div>
+
+
+				</>)
+			})}
+		</div>
+	</>)
+
+
+
+
+
+
 };
 
 export default Characters;

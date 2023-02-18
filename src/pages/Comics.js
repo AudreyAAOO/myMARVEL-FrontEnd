@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import des composants
 import Button from "../components/Button";
 import Search from "../components/Search";
-
+// { pins, handlepins }
 const Comics = () => {
 	const navigate = useNavigate();
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchCo, setSearchCo] = useState("");
-
+	const [pins, setPins] = useState([]);
 	// const params = useParams();
 	// const id = params.id;
 	// console.log("id", params);
@@ -40,6 +40,17 @@ const Comics = () => {
 		fetchData();
 	}, [searchCo]);
 
+	// useEffect(() => {
+	// 	const pins = JSON.parse(localStorage.getItem('pins'));
+	// 	if (pins) {
+	// 		setPins(pins);
+	// 	}
+	// }, []);
+
+	// useEffect(() => {
+	// 	localStorage.setItem('pins', JSON.stringify(pins));
+	// }, [pins]);
+
 	const researchComics = (event) => {
 		//console.log(event.target.value);
 		setSearchCo(event.target.value);
@@ -54,6 +65,25 @@ const Comics = () => {
 	const prevPage = () => {
 		// navigate("/characters");
 	}
+
+	const handlePins = () => {
+		const copy = [...pins]
+		copy.push({
+			name: 2
+});
+		setPins(copy);
+		console.log(pins);
+	}
+
+	// const handleFavorite = (comics) => {
+	// 	// console.log(event.target.value);
+	// 	// console.log("test");
+	// console.log(comics);
+	// 	handlepins("mypinsoritesComics", comics._id);
+
+	// 	console.log(handlepins);
+	// 	alert(pins);
+	// }
 
 	return isLoading ? (
 		<p>Loading ...!</p>
@@ -92,7 +122,9 @@ const Comics = () => {
 
 								<div className="containerDescription">
 									<p> {comics.description}</p>
-									<FontAwesomeIcon icon={["far", "heart"]} />
+									<FontAwesomeIcon icon={["far", "heart"]}
+										onClick={handlePins}
+									/>
 								</div>
 							</article>
 

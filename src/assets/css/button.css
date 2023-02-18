@@ -54,3 +54,7 @@
 	border-radius: 50px 0px 50px 0px;
 	cursor: pointer;
 }
+
+.noBtn {
+display: none;
+}
