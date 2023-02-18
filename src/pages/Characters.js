@@ -15,7 +15,12 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchC, setSearchC] = useState("");
-	const navigate = useNavigate();
+	// const [isLastPage, setIsLastPage] = useState(false);
+	// const [nbrPages, setNbrPages] = useState(0);
+
+
+
+	// const navigate = useNavigate();
 
 
 
@@ -29,6 +34,8 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 				// console.log(response.data);
 				setData(response.data);
 				setIsLoading(false);
+				// setIsLastPage(((response.data.count - (skip + limit)) <= 0 ? true : false));
+				// setNbrPages = (data.count - skip) / limit;
 			} catch (error) {
 				console.log(error.response);
 			}
@@ -59,6 +66,19 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 
 	}
 
+	// let nbrPages = (data.count - skip) / limit;
+	// let nbrPagesAAfficher = 10;
+	// if (nbrPages < 10) {
+	// 	nbrPagesAAfficher = nbrPages;
+	// }
+	// const page = () => {
+
+	// for (let i = 1; i <= nbrPagesAAfficher; i++) {
+	// 	console.log("test");
+	// 	// return skip + i
+
+	// }
+
 
 	return isLoading ? (
 		<p>Loading ...!</p>
@@ -86,47 +106,59 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 
 					{/* voir cours sur le formulaire publish, comment on a camouflé le button files */}
 
-					<Button className={skip !== 0 ? "btnPrev" : "noBtn"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
-					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="" />
-					{/* className={skip > 1 ? "btnNext" : "noBtn"} */}
+					<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+					<Button className={"btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
+					{/* className={isLastPage ? "noBtn" : "btnNext"} */}
+					{/* {skip !== 1 && */}
+						{/* // <div> */}
+
+						{/* <Link to={skip/100}>	<p>page : {skip / 100}</p>
+				
+						</Link> */}
+						{/* <p>nbr pages à afficher :{nbrPagesAAfficher}</p>
+							<p>nbr pages :{nbrPages}</p> */}
+						{/* <p>{data.count} résultats</p>	</div>} */}
+
+
+						{/* className= "btnNext" : "noBtn"} */}
+					</div>
 				</div>
-			</div>
 
 
-			{data.results.map((character) => {
-				return (<>
+				{data.results.map((character) => {
+					return (<>
 
-					<div className="charactersCard">
-						{/* {data.results.map((character, index) => {
+						<div key={character._id} className="charactersCard">
+							{/* {data.results.map((character, index) => {
 								return (
 						<> */}
-						{/* {`/Characters/${character._id}                   */}
-						<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
+							{/* {`/Characters/${character._id}                   */}
+							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-							<article key={character._id}>
-								<h2>{character.name}</h2>
+								<article >
+									<h2>{character.name}</h2>
 
-								<div className="containerImg">
-									<img
-										src={displayImg(character)}
-										alt="personnage"
-									/>
+									<div className="containerImg">
+										<img
+											src={displayImg(character)}
+											alt="personnage"
+										/>
 
-								</div>
+									</div>
 
-								<div className="containerDescription">
-									<p> {character.description}</p>
-									<FontAwesomeIcon icon={["far", "heart"]} />
-								</div>
-							</article>
-						</Link>
-					</div>
+									<div className="containerDescription">
+										<p> {character.description}</p>
+										<FontAwesomeIcon className="heartIconCharacters" icon={["far", "heart"]} />
+									</div>
+								</article>
+							</Link>
+						</div>
 
 
-				</>)
-			})}
-		</div>
-	</>)
+					</>)
+				})}
+			</div>
+		</>)
 
 
 

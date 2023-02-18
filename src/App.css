@@ -6,6 +6,7 @@ h1 {
 
 h2 {
 	font-size: 17px;
+	color: white;
 }
 
 a {
@@ -20,7 +21,6 @@ a {
 	align-items: center;
 	background-color: rgb(23, 233, 12);
 }
-
 
 /* .buttonsPages button {
 	width: 200px;

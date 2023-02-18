@@ -9,12 +9,12 @@ import Button from "../components/Button";
 import Search from "../components/Search";
 // { pins, handlepins }
 const Comics = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
-	const [searchCo, setSearchCo] = useState("");
-	const [pins, setPins] = useState([]);
+	const [search, setSearch] = useState("");
+	// const [pins, setPins] = useState([]);
 	// const params = useParams();
 	// const id = params.id;
 	// console.log("id", params);
@@ -26,7 +26,7 @@ const Comics = () => {
 			try {
 
 				const response = await axios.get(
-					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics?title=${searchCo}`);
+					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics?title=${search}`);
 				console.log("(*＾▽＾)／ response.data: ", response.data);
 				// Je stocke le résultat dans data
 				setData(response.data);
@@ -38,7 +38,7 @@ const Comics = () => {
 		};
 
 		fetchData();
-	}, [searchCo]);
+	}, [search]);
 
 	// useEffect(() => {
 	// 	const pins = JSON.parse(localStorage.getItem('pins'));
@@ -53,8 +53,8 @@ const Comics = () => {
 
 	const researchComics = (event) => {
 		//console.log(event.target.value);
-		setSearchCo(event.target.value);
-		console.log(searchCo);
+		setSearch(event.target.value);
+		console.log(search);
 	}
 	const nextPage = () => {
 
@@ -66,14 +66,14 @@ const Comics = () => {
 		// navigate("/characters");
 	}
 
-	const handlePins = () => {
-		const copy = [...pins]
-		copy.push({
-			name: 2
-});
-		setPins(copy);
-		console.log(pins);
-	}
+// 	const handlePins = () => {
+// 		const copy = [...pins]
+// 		copy.push({
+// 			name: 2
+// });
+// 		setPins(copy);
+// 		console.log(pins);
+// 	}
 
 	// const handleFavorite = (comics) => {
 	// 	// console.log(event.target.value);
@@ -91,7 +91,7 @@ const Comics = () => {
 		<div className="container">
 			<div className="menu">
 
-				<Search className="searchCo" onChange={(event) => researchComics(event)} name="rechercher un comics" value={searchCo} />
+				<Search className="search" onChange={(event) => researchComics(event)} name="rechercher un comics" value={search} />
 
 				<div className="buttonsPages">
 					<Button className="btnPrev" actionClick={() => prevPage()} name="page précédente" value="page précédente" />
@@ -110,9 +110,9 @@ const Comics = () => {
 							<article key={comics._id}>
 
 								<h2>{comics.title}</h2>
-								{/* "/standard_xlarge" + */}
+								{/*  */}
 								<div className="containerImg">
-									<img src={comics.thumbnail.path +
+									<img src={comics.thumbnail.path + "/portrait_medium" +
 										"." +
 										comics.thumbnail.extension
 									}
@@ -122,8 +122,10 @@ const Comics = () => {
 
 								<div className="containerDescription">
 									<p> {comics.description}</p>
-									<FontAwesomeIcon icon={["far", "heart"]}
+									{/* <FontAwesomeIcon icon={["far", "heart"]}
 										onClick={handlePins}
+									/> */}
+									<FontAwesomeIcon className="heartIconComics" icon={["far", "heart"]}
 									/>
 								</div>
 							</article>
