@@ -86,7 +86,7 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 
 					{/* voir cours sur le formulaire publish, comment on a camouflé le button files */}
 
-					<Button className={skip !== 1 ? "btnPrev" : "noBtn"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+					<Button className={skip !== 0 ? "btnPrev" : "noBtn"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
 					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="" />
 					{/* className={skip > 1 ? "btnNext" : "noBtn"} */}
 				</div>
@@ -127,7 +127,6 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 			})}
 		</div>
 	</>)
-
 
 
 
