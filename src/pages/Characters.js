@@ -10,17 +10,21 @@ import Button from "../components/Button";
 import Search from "../components/Search";
 
 
-const Characters = () => {
+const Characters = ({ skip, setSkip, limit, setLimit }) => {
+
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
-	const [search, setSearch] = useState("");
-
+	const [searchC, setSearchC] = useState("");
 	const navigate = useNavigate();
 
+	let displayImg = (character) => { return character.thumbnail.path + "/standard_xlarge" + "." + character.thumbnail.extension };
+
+
 	useEffect(() => {
+		// &skip=${skip}&limit=${limit}
 		const fetchData = async () => {
 			try {
-				const response = await axios.get("https://site--mymarvel--hw4gvwsxlwd5.code.run/characters");
+				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}`);
 				// console.log(response.data);
 				setData(response.data);
 				setIsLoading(false);
@@ -29,22 +33,22 @@ const Characters = () => {
 			}
 		};
 		fetchData();
-	}, []);
-
+	}, [searchC]);
+	// , skip, limit
 
 	const research = (e) => {
 		console.log(e.target.value);
-		setSearch(e.target.value);
+		setSearchC(e.target.value);
 	}
 
 	const nextPage = () => {
-
+		setSkip(skip + limit);
 		// `characters?skip=${skip}&limit=${limit}
 		// navigate(`/`);
 	}
 
 	const prevPage = () => {
-		navigate("/characters");
+		setSkip(skip - limit);
 	}
 
 
@@ -52,12 +56,10 @@ const Characters = () => {
 		<p>Loading ...!</p>
 	) : (<>
 
-
-
 		<div className="container">
 			<div className="menu">
 				{/* <div className="search"> */}
-				<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={search} />
+				<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={searchC} />
 				{/* <input
 						value={search}
 						type="text"
@@ -86,21 +88,18 @@ const Characters = () => {
 				{data.results.map((character) => {
 					return (
 						<>
+							{/* {`/Characters/${character._id}                   */}
+							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-							<Link to={`/Comics/${character._id}`}>
 								<article key={character._id}>
 									<h2>{character.name}</h2>
 
 									<div className="containerImg">
 										<img
-											src={
-												character.thumbnail.path +
-												"/standard_xlarge" +
-												"." +
-												character.thumbnail.extension
-											}
+											src={displayImg(character)}
 											alt="personnage"
 										/>
+
 									</div>
 
 									<div className="containerDescription">

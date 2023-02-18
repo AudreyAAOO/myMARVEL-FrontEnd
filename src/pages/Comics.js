@@ -9,28 +9,24 @@ import Button from "../components/Button";
 import Search from "../components/Search";
 
 const Comics = () => {
+	const navigate = useNavigate();
+
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
-	const [search, setSearch] = useState("");
+	const [searchCo, setSearchCo] = useState("");
 
-	const params = useParams();
-	const id = params.id;
-	console.log(params);
-
-	const research = (e) => {
-		console.log(e.target.value);
-		setSearch(e.target.value);
-
-	}
-
+	// const params = useParams();
+	// const id = params.id;
+	// console.log("id", params);
 
 	useEffect(() => {
 		console.log("---- useEffect executed ----  ");
 		// Je déclare la fonction qui fait la requête
 		const fetchData = async () => {
 			try {
+
 				const response = await axios.get(
-					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics`);
+					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics?title=${searchCo}`);
 				console.log("(*＾▽＾)／ response.data: ", response.data);
 				// Je stocke le résultat dans data
 				setData(response.data);
@@ -42,7 +38,22 @@ const Comics = () => {
 		};
 
 		fetchData();
-	}, []);
+	}, [searchCo]);
+
+	const researchComics = (event) => {
+		//console.log(event.target.value);
+		setSearchCo(event.target.value);
+		console.log(searchCo);
+	}
+	const nextPage = () => {
+
+		// `characters?skip=${skip}&limit=${limit}
+		// navigate(`/`);
+	}
+
+	const prevPage = () => {
+		// navigate("/characters");
+	}
 
 	return isLoading ? (
 		<p>Loading ...!</p>
@@ -50,22 +61,24 @@ const Comics = () => {
 		<div className="container">
 			<div className="menu">
 
-				<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={search} />
+				<Search className="searchCo" onChange={(event) => researchComics(event)} name="rechercher un comics" value={searchCo} />
 
 				<div className="buttonsPages">
-					{/* <Button className="btnPrev" actionClick={() => prevPage()} name="page précédente" value="page précédente" />
-					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="page suivante" /> */}
-
+					<Button className="btnPrev" actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="page suivante" />
 				</div>
 			</div>
 
 			<div className="comicsCard">
-				{data.results.map((comics) => {
+				{data.results.sort(function (a, b) {
+					//   return a.title - b.title;
+					//   return a.title.localeCompare(b.title);
+				}).map((comics) => {
 					return (
 						<>
 
-
 							<article key={comics._id}>
+
 								<h2>{comics.title}</h2>
 								{/* "/standard_xlarge" + */}
 								<div className="containerImg">
