@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Marvel_Logo from "../assets/img/Marvel_Logo.png";
+import { Link, useNavigate } from "react-router-dom";
+// import Marvel_Logo from "../assets/img/Marvel_Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/css/characters.css";
 
 // import des composants
 import Button from "../components/Button";
+import Search from "../components/Search";
+
 
 const Characters = () => {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState("");
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -27,41 +31,53 @@ const Characters = () => {
 		fetchData();
 	}, []);
 
+
+	const research = (e) => {
+		console.log(e.target.value);
+		setSearch(e.target.value);
+	}
+
 	const nextPage = () => {
-		console.log("next");
+
+		// `characters?skip=${skip}&limit=${limit}
+		// navigate(`/`);
 	}
+
 	const prevPage = () => {
-		console.log("previous");
+		navigate("/characters");
 	}
+
 
 	return isLoading ? (
 		<p>Loading ...!</p>
-	) : (
+	) : (<>
+
+
+
 		<div className="container">
-			<div className="hero">
-				<img src={Marvel_Logo} alt="" />
-				<p>Bienvenue sur mon API Marvel</p>
-			</div>
 			<div className="menu">
-				<div className="search">
-					<input
+				{/* <div className="search"> */}
+				<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={search} />
+				{/* <input
 						value={search}
 						type="text"
 						placeholder="rechercher un personnage"
 						onChange={(event) => {
 							console.log(event.target.value);
 							setSearch(event.target.value);
-						}}
-					></input>
-				</div>
+						}}></input> */}
+
+				{/* </div>  */}
 				<div className="buttonsPages">
 
 					{/* <Button actionClick={() => prevPage()} /> */}
-					<button>page précédente</button>
-					<button>page suivante</button>
+					{/* <button>page précédente</button>
+					<button>page suivante</button> */}
 
-					{/* //todo voir cours sur le formulaire publish, comment on a camouflé le button files */}
-					<Button actionClick={() => nextPage()} name="eeerr" value="sdbfsdjkfb" />
+					{/* voir cours sur le formulaire publish, comment on a camouflé le button files */}
+
+					<Button className="btnPrev" actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="page suivante" />
 
 				</div>
 			</div>
@@ -97,8 +113,8 @@ const Characters = () => {
 					);
 				})}
 			</div>
-		</div>
-	);
+		</div >
+	</>);
 };
 
 export default Characters;

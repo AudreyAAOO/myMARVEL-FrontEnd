@@ -1,42 +1,28 @@
+h1 {
+	font-weight: 700;
+	color: white;
+	font-size: 40px;
+}
 
-
-
-
-
-
-
-
+h2 {
+	font-size: 17px;
+}
 
 a {
 	text-decoration: none;
 	color: white;
 }
 
-
 /* barre de recherche et pagination */
 .menu {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	background-color: rgb(23, 233, 12);
 }
 
-.search {
-	width: 280px;
-	height: 40px;
-	border-radius: 20px;
-	border: 1px solid rgba(162, 162, 162, 0.8);
-	background-color: rgb(255, 255, 255);
-	display: flex;
-}
 
-.search input {
-	background-color: transparent;
-	border: none;
-	outline: none;
-	align-self: center;
-}
-
-.buttonsPages button {
+/* .buttonsPages button {
 	width: 200px;
 	height: 42px;
 	font-size: 16px;
@@ -45,13 +31,13 @@ a {
 	color: rgb(0, 0, 0);
 	align-self: center;
 	margin: 5px 10px;
-}
-
+} */
+/* 
 .buttonsPages button:hover {
 	background-color: rgb(6, 41, 183);
 	color: white;
 	cursor: pointer;
-}
+} */
 
 /* page 404 */
 .container_page404 {
@@ -64,9 +50,8 @@ a {
 	margin: 100px auto;
 	font-size: 30px;
 }
-.container_page404 > img{ 
-width: 200px;
-
+.container_page404 > img {
+	width: 200px;
 }
 .link-home {
 	display: flex;
