@@ -1,12 +1,12 @@
 h1 {
 	font-weight: 700;
-	color: white;
+	color: rgb(0, 0, 0);
 	font-size: 40px;
 }
 
 h2 {
 	font-size: 17px;
-	color: white;
+	color: rgb(0, 0, 0);
 }
 
 a {
@@ -15,11 +15,11 @@ a {
 }
 
 /* barre de recherche et pagination */
-.menu {
+.menuSearch {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	background-color: rgb(23, 233, 12);
+	background-color:#e6e6e6;
 }
 
 /* .buttonsPages button {
@@ -40,6 +40,7 @@ a {
 } */
 
 /* page 404 */
+
 .container_page404 {
 	height: 50vh;
 	display: flex;
@@ -53,7 +54,19 @@ a {
 .container_page404 > img {
 	width: 200px;
 }
-.link-home {
-	display: flex;
+
+/* .link-home {
+	background-color: rgb(0, 255, 98);
+	font-weight: 700;
+	color: rgb(254, 254, 254);
+	font-size: 20px;
+	text-align: center;
+	/* max-width: 100vw; */
+	/* display: flex;
 	justify-content: center;
-}
+	align-items: center;
+	flex-wrap: wrap;
+	/* grid-template-columns: repeat(4, 1fr); */
+	/* gap: 16px;
+	padding: 10px 0; */ 
+/* } */ 

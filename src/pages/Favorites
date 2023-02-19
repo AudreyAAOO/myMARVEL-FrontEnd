@@ -1,0 +1,21 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+// import Marvel_Logo from "../assets/img/Marvel_Logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import "../assets/css/favorites.css";
+
+// import des composants
+import Button from "../components/Button";
+import Search from "../components/Search";
+
+
+const Favorites = () => {
+
+	return  
+
+
+
+};
+
+export default Favorites;

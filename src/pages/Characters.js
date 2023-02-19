@@ -10,31 +10,29 @@ import Button from "../components/Button";
 import Search from "../components/Search";
 
 
-const Characters = ({ skip, setSkip, limit, setLimit }) => {
+const Characters = () => {
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchC, setSearchC] = useState("");
-	// const [isLastPage, setIsLastPage] = useState(false);
+	const [skip, setSkip] = useState(0);
+	const [limit, setLimit] = useState(100);
+	const [isLastPage, setIsLastPage] = useState(false);
 	// const [nbrPages, setNbrPages] = useState(0);
-
 
 
 	// const navigate = useNavigate();
 
 
-
 	useEffect(() => {
-		// const limit = 100;
-		// const skip = 0;
-		// &skip=${skip}&limit=${limit}
+
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}&skip=${skip}&limit=${limit}`);
 				// console.log(response.data);
 				setData(response.data);
 				setIsLoading(false);
-				// setIsLastPage(((response.data.count - (skip + limit)) <= 0 ? true : false));
+				setIsLastPage(((response.data.count - (skip + limit)) <= 0 ? true : false));
 				// setNbrPages = (data.count - skip) / limit;
 			} catch (error) {
 				console.log(error.response);
@@ -48,6 +46,7 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 	const research = (e) => {
 		console.log(e.target.value);
 		setSearchC(e.target.value);
+		setSkip(0);
 	}
 
 	const nextPage = () => {
@@ -63,7 +62,6 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 		if ((skip - limit) > -1) { // 100 - 100  = 0 > -1  
 			setSkip(skip - limit);
 		}
-
 	}
 
 	// let nbrPages = (data.count - skip) / limit;
@@ -84,11 +82,10 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 		<p>Loading ...!</p>
 	) : (<>
 
-		<div className="container">
-			<div className="menu">
-				{/* <div className="search"> */}
-				<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={searchC} />
-				{/* <input
+		<div className="menuSearch">
+
+			<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={searchC} />
+			{/* <input
 						value={search}
 						type="text"
 						placeholder="rechercher un personnage"
@@ -97,68 +94,59 @@ const Characters = ({ skip, setSkip, limit, setLimit }) => {
 							setSearch(event.target.value);
 						}}></input> */}
 
-				{/* </div>  */}
-				<div className="buttonsPages">
+			{/* </div>  */}
+			<div className="buttonsPages">
 
-					{/* <Button actionClick={() => prevPage()} /> */}
-					{/* <button>page précédente</button>
+				{/* <Button actionClick={() => prevPage()} /> */}
+				{/* <button>page précédente</button>
 					<button>page suivante</button> */}
 
-					{/* voir cours sur le formulaire publish, comment on a camouflé le button files */}
+				<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+				<Button className={isLastPage ? "noBtn" : "btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
 
-					<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
-					<Button className={"btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
-					{/* className={isLastPage ? "noBtn" : "btnNext"} */}
-					{/* {skip !== 1 && */}
-						{/* // <div> */}
+				{skip !== 1 && <p>page : {skip / 100}</p>}
+				{/* // <div> */}
 
-						{/* <Link to={skip/100}>	<p>page : {skip / 100}</p>
-				
-						</Link> */}
-						{/* <p>nbr pages à afficher :{nbrPagesAAfficher}</p>
+
+
+				{/* <p>nbr pages à afficher :{nbrPagesAAfficher}</p>
 							<p>nbr pages :{nbrPages}</p> */}
-						{/* <p>{data.count} résultats</p>	</div>} */}
+				{/* <p>{data.count} résultats</p>	</div>} */}
 
 
-						{/* className= "btnNext" : "noBtn"} */}
-					</div>
-				</div>
+			</div>
+		</div>
 
+		<div className="container">
+			{data.results.map((character) => {
+				return (<>
+					<div className="charactersCard">
 
-				{data.results.map((character) => {
-					return (<>
-
-						<div key={character._id} className="charactersCard">
-							{/* {data.results.map((character, index) => {
-								return (
-						<> */}
-							{/* {`/Characters/${character._id}                   */}
+						<article key={character._id}>
+							<h2>{character.name}</h2>
 							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-								<article >
-									<h2>{character.name}</h2>
-
-									<div className="containerImg">
-										<img
-											src={displayImg(character)}
-											alt="personnage"
-										/>
-
-									</div>
-
-									<div className="containerDescription">
-										<p> {character.description}</p>
-										<FontAwesomeIcon className="heartIconCharacters" icon={["far", "heart"]} />
-									</div>
-								</article>
+								<div className="containerImgChar">
+									<img
+										src={displayImg(character)}
+										alt="personnage"
+									/>
+								</div>
 							</Link>
-						</div>
+							<div className="containerDescription">
+								<p>{character.description}</p>
+								<FontAwesomeIcon className="heartIconCharacters" icon={["far", "heart"]} />
+							</div>
+
+						</article>
+
+					</div>
 
 
-					</>)
-				})}
-			</div>
-		</>)
+				</>)
+			})}
+		</div>
+	</>)
 
 
 

@@ -1,18 +1,15 @@
-.search {
+.menu > .search {
 	width: 280px;
 	height: 40px;
 	border-radius: 20px;
-	border: 2px solid #e6e6e6;
-	/* background-color: rgb(255, 255, 255); */
+	border: 3px solid #E6E6E6;
 	display: flex;
+	/* background-color: rgb(220, 28, 28);  */
 }
 
-/* .search input {
-	/* background-color: transparent; */
-
-/* border: none; */
-/* outline: none; */
-/* align-self: center;
-	background-color: rgb(20, 238, 195); */
-
-/* }  */
+.search { 
+	border: none;
+	outline: none;
+	align-self: center;
+	text-align: center;
+}

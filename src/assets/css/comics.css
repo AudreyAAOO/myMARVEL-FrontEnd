@@ -1,4 +1,4 @@
-.heroComics{
+/* .heroComics {
 	background-color: rgb(0, 0, 0);
 	display: flex;
 	flex-direction: column;
@@ -7,4 +7,67 @@
 	font-weight: 700;
 	color: white;
 	font-size: 40px;
+} */
+
+.comicsCard {
+	border: 2px solid rgb(11, 40, 230);
+	font-weight: 700;
+	color: rgb(254, 254, 254);
+	font-size: 20px;
+	line-height: 26px;
+	text-align: center;
+	margin: 15px 0;
+}
+
+.comicsCard article {
+	width: 200px;
+	height: 290px;
+	padding: 8px;
+	background-color:#e6e6e6;
+	position: relative;
+}
+
+.containerImgC {
+	/* background-color: rgb(0, 0, 0); */
+	display: flex;
+	justify-content: center;
+	margin: 10px 0;
+}
+
+.containerImgC > img {
+	border: 2px solid #e6f1fa;
+	max-width: 150px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.containerDescription > p {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	text-align: justify;
+	font-weight: 400;
+	margin-bottom: 5px;
+	color: rgb(0, 0, 0);
+}
+
+.containerDescription {
+	position: relative;
+}
+
+.heartIconComics {
+	color: rgb(58, 56, 56);
+	border: 1px solid white;
+	padding: 3px;
+	border-radius: 50%;
+	background-color: white;
+	position: absolute;
+	left: 170px;
+	top: -213px;
+}
+
+.heartIconComics:hover {
+	color: rgb(0, 75, 250);
+	cursor: grab;
 }

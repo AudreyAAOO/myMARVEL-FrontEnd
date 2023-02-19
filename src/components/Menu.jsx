@@ -20,8 +20,8 @@ const Menu = ({ search }) => {
 				<img src={Hulk_Logo} alt="" />
 			</div>
 			<span>
-				<Link to={"/favoris"}>Favoris</Link>
-			</span>
+				<Link to={"/favoris"}>Favoris</Link> 
+						</span>
 		</div>
 	);
 };

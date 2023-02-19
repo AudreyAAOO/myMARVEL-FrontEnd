@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import Characters from "./pages/Characters";
 import Comics from "./pages/Comics";
 import Page404 from './pages/Page404';
-// import Favorites from "./pages/Favorites";
+import Favorites from "./pages/Favorites";
 
 
 // import des composants
@@ -24,6 +24,7 @@ import Menu from "./components/Menu";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import ComicsByCharactersId from "./pages/ComicsByCharactersId";
+import Search from "./components/Search";
 library.add(faHeart);
 
 
@@ -55,23 +56,23 @@ function App() {
   // };
 
 
-
-
-
-  return (
+  return (<>
     <Router>
       <Header />
       <Menu />
+
       <Routes>
         <Route path="/" element={<Characters skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
-        <Route path="/comics" element={<Comics />} />{/*handleFav={handleFav} fav={fav}*/}
+        <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit}/>} />{/*handleFav={handleFav} fav={fav}*/}
         <Route path="/comics/:characterId" element={<ComicsByCharactersId />} />
-        {/* <Route path="/favorites" element={<Favorites />} /> */}
+       <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />
     </Router>
-  );
+    
+   
+  </>);
 }
 
 export default App;
