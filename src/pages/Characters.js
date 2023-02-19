@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-// import Marvel_Logo from "../assets/img/Marvel_Logo.png";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/css/characters.css";
+import Cookies from "js-cookie";
 
 // import des composants
 import Button from "../components/Button";
 import Search from "../components/Search";
 
 
-const Characters = () => {
+const Characters = ({ handlePins, setPinsChar, pinsChar }) => {
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +19,8 @@ const Characters = () => {
 	const [limit, setLimit] = useState(100);
 	const [isLastPage, setIsLastPage] = useState(false);
 	// const [nbrPages, setNbrPages] = useState(0);
+	// const [pinsChar, setPinsChar] = useState(Cookies.get("myFavoritesChar") || null);
+
 
 
 	// const navigate = useNavigate();
@@ -40,8 +42,8 @@ const Characters = () => {
 		};
 		fetchData();
 	}, [searchC, skip, limit]);
-	// 
-	let displayImg = (character) => { return character.thumbnail.path + "/standard_xlarge" + "." + character.thumbnail.extension };
+
+	let displayImg = (character) => { return character.thumbnail.path + `/standard_xlarge` + "." + character.thumbnail.extension };
 
 	const research = (e) => {
 		console.log(e.target.value);
@@ -63,6 +65,13 @@ const Characters = () => {
 			setSkip(skip - limit);
 		}
 	}
+
+
+	// const handlePinsChar = (characterId) => {
+	// 	// setPinsChar(characterId);
+	// 	Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
+	// 	console.log(pinsChar);
+	// }
 
 	// let nbrPages = (data.count - skip) / limit;
 	// let nbrPagesAAfficher = 10;
@@ -126,16 +135,29 @@ const Characters = () => {
 							<h2>{character.name}</h2>
 							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-								<div className="containerImgChar">
+								<div key={character._id} className="containerImgChar">
 									<img
 										src={displayImg(character)}
 										alt="personnage"
+										key={character._id}
 									/>
 								</div>
 							</Link>
-							<div className="containerDescription">
-								<p>{character.description}</p>
-								<FontAwesomeIcon className="heartIconCharacters" icon={["far", "heart"]} />
+							<div key={character._id} className="containerDescription">
+								<p key={character._id}>{character.description}</p>
+								<FontAwesomeIcon
+
+									className={pinsChar >= 1 ? "checkPins" : "heartIconComics"}  // {/**/}
+									icon={["far", "heart"]}
+									onClick={() => {
+										// const copy = [...pinsChar];
+										handlePins(pinsChar.push(character.name));
+										console.log("pinschar", pinsChar);
+										// setPinsChar(pinsChar.push(character.name));
+										Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
+
+									}} />
+
 							</div>
 
 						</article>

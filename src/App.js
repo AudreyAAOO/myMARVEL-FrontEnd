@@ -38,38 +38,39 @@ function App() {
 
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(100);
-  const [fav, setFav] = useState(Cookies.get("myFavoritesComics") || null);
-
+  // const [pins, setPins] = useState(Cookies.get("myFavorites") || null);
+  const [pinsChar, setPinsChar] = useState(Cookies.get("myFavoritesChar") || []);
 
 
   // Cette fonction permet de stocker le token dans le state et dans les cookies ou supprimer le token dans le state et dans les cookies
-  // const handleFav = (fav) => {
-  //   if (fav) {
-  //     setFav(fav);
-  //     Cookies.set("myFavoritesComics", fav, { expires: 365 });
-  //   } else {
-  //     setFav(null);
-  //     Cookies.remove("myFavoritesComics");
-  //   }
-  // };
+  const handlePins = () => {
+    if (pinsChar) {
+      const copy = [...pinsChar];
+      // copy.push(pinsChar);
+      setPinsChar(copy);
+      Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
+    } else {
+      setPinsChar([]);
+      Cookies.remove("myFavorites");
+    }
+  };
 
 
   return (<>
     <Router>
       <Header />
       <Menu />
-
+      {/* setPins={setPins} pins={pins} */}
       <Routes>
-        <Route path="/" element={<Characters skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
-        <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit}/>} />{/*handleFav={handleFav} fav={fav}*/}
+        <Route path="/" element={<Characters handlePins={handlePins} setPinsChar={setPinsChar} pinsChar={pinsChar} skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
+        <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
         <Route path="/comics/:characterId" element={<ComicsByCharactersId />} />
-       <Route path="/favorites" element={<Favorites />} />
+        <Route path="/favorites" element={<Favorites pinsChar={pinsChar} />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />
     </Router>
-    
-   
+
   </>);
 }
 

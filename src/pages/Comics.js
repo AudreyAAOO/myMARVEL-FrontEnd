@@ -1,7 +1,6 @@
 import "../assets/css/comics.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import des composants
@@ -124,7 +123,7 @@ const Comics = () => {
 
 			{data.results.sort(function (a, b) {
 				//   return a.title - b.title;
-				//   return a.title.localeCompare(b.title);
+				return a.title.localeCompare(b.title);
 			}).map((comics) => {
 				return (<>
 					<div className="comicsCard">
@@ -132,11 +131,12 @@ const Comics = () => {
 						<article key={comics._id}>
 							<h2>{comics.title}</h2>
 
-							<div className="containerImgC">
+							<div key={comics._id} className="containerImgC">
+								{comics.thumbnail.path && ( 
 								<img
 									src={displayImg(comics)}
 									alt="couverture_comics"
-								/>
+								/>)}
 								{/* <img src={comics.thumbnail.path + 
 								"/portrait_medium" +
 									"." +
