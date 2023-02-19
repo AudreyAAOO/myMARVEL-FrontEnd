@@ -1,4 +1,5 @@
 
+import comicsByCharactersId from "../assets/css/comicsByCharactersId.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -14,7 +15,7 @@ const ComicsByCharactersId = () => {
     //console.log(params);
 
 
-    const displayImg = (ComicsByCharacters) => { return ComicsByCharacters.thumbnail.path + "/standard_xlarge" + "." + ComicsByCharacters.thumbnail.extension };
+    const displayImg = (comicsByCharacters) => { return comicsByCharacters.thumbnail.path + "/standard_fantastic" + "." + comicsByCharacters.thumbnail.extension };
 
 
     const [data, setData] = useState();
@@ -47,44 +48,42 @@ const ComicsByCharactersId = () => {
     return isLoading ? (
         <p>Loading ...!</p>
     ) : (<>
+        <div className="container">
+
+            {data.comics.map((comicsByCharacters) => {
+
+                // console.log(comicsByCharacters);
+                return (<>
+                    <div className="ComicsCharCard">
+                        <article key={character._id}>
+                            <h2>Retrouvez ce personnage dans les comics suivants :</h2>
+                            <div className="containerImgCC">
+                                <img
+                                    src={displayImg(comicsByCharacters)}
+                                    alt="comics"
+                                />
+                            </div>
+                            <div className="containerDescription">
+                                <p>titre: {comicsByCharacters.title}</p>
+                                <p>description: {comicsByCharacters.description}</p>
+                            	<FontAwesomeIcon className="heartIconCC" icon={["far", "heart"]} />
+							
+                            </div>
+                        </article>
+                    </div>
+                </>)
 
 
-        {/* {data.results.map((ComicsByCharacters) => { 
-          return (<> 
-            <Button />
-                {console.log("test id", characterId)};
-               <article key={ComicsByCharacters._id}> 
-                    {/* <h2>{ComicsByCharacters.name}</h2> */}
+            })}
 
-        {data.comics.map((ComicsByCharacters) => {
-            console.log(ComicsByCharacters);
-            return (<>
+            <Link to={("/")}> Retourner sur la page d'acceuil</Link>
 
-                <div className="containerImg">
-                    <img
-                        src={displayImg(ComicsByCharacters)}
-                        alt="comics"
-                    />
-
-                </div>
-                <p>titre: {ComicsByCharacters.title}</p>
-                <p>description: {ComicsByCharacters.description}</p>
-            </>)
-        })}
-
-
-        <Link to={("/")}> Retourner sur la page d'acceuil</Link>
-
-
-
-
-
-
+        </div>
     </>)
 
 }
 
-export default ComicsByCharactersId;
+export default comicsByCharactersId;
 
 
 

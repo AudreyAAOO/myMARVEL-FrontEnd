@@ -29,10 +29,10 @@ const Comics = () => {
 		// Je déclare la fonction qui fait la requête
 		const fetchData = async () => {
 			try {
-	
+
 				const response = await axios.get(
 					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics?title=${search}&skip=${skip}&limit=${limit}`);
-				console.log("(*＾▽＾)／ response.data: ", response.data);
+				// console.log("(*＾▽＾)／ response.data: ", response.data);
 				// Je stocke le résultat dans data
 				setData(response.data);
 				setIsLoading(false);
@@ -44,6 +44,10 @@ const Comics = () => {
 
 		fetchData();
 	}, [search, skip, limit]);
+
+
+	let displayImg = (comics) => { return comics.thumbnail.path + "/portrait_medium" + "." + comics.thumbnail.extension };
+
 
 	// useEffect(() => {
 	// 	const pins = JSON.parse(localStorage.getItem('pins'));
@@ -109,7 +113,7 @@ const Comics = () => {
 			<div className="buttonsPages">
 				<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
 				<Button className={isLastPage ? "noBtn" : "btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
-				
+
 				{skip !== 1 && <p>page : {skip / 100}</p>}
 			</div>
 		</div>
@@ -129,12 +133,17 @@ const Comics = () => {
 							<h2>{comics.title}</h2>
 
 							<div className="containerImgC">
-								<img src={comics.thumbnail.path + "/portrait_medium" +
+								<img
+									src={displayImg(comics)}
+									alt="couverture_comics"
+								/>
+								{/* <img src={comics.thumbnail.path + 
+								"/portrait_medium" +
 									"." +
 									comics.thumbnail.extension
 								}
 									alt="personnage"
-								/>
+								/> */}
 							</div>
 
 							<div className="containerDescription">
