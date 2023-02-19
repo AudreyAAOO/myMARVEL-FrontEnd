@@ -1,10 +1,7 @@
-
-import "./App.css";
+import "./assets/css/App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
-
-// 
 
 
 // import des pages
@@ -38,15 +35,12 @@ function App() {
 
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(100);
-  // const [pins, setPins] = useState(Cookies.get("myFavorites") || null);
   const [pinsChar, setPinsChar] = useState(Cookies.get("myFavoritesChar") || []);
 
 
-  // Cette fonction permet de stocker le token dans le state et dans les cookies ou supprimer le token dans le state et dans les cookies
   const handlePins = () => {
     if (pinsChar) {
       const copy = [...pinsChar];
-      // copy.push(pinsChar);
       setPinsChar(copy);
       Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
     } else {
@@ -60,7 +54,6 @@ function App() {
     <Router>
       <Header />
       <Menu />
-      {/* setPins={setPins} pins={pins} */}
       <Routes>
         <Route path="/" element={<Characters handlePins={handlePins} setPinsChar={setPinsChar} pinsChar={pinsChar} skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
         <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />

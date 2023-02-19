@@ -22,32 +22,12 @@ a {
 	color: white;
 }
 
-/* barre de recherche et pagination */
 .menuSearch {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
 	background-color: #e6e6e6;
 }
-
-/* .buttonsPages button {
-	width: 200px;
-	height: 42px;
-	font-size: 16px;
-	border-radius: 18px;
-	background-color: rgb(255, 255, 255);
-	color: rgb(0, 0, 0);
-	align-self: center;
-	margin: 5px 10px;
-} */
-/* 
-.buttonsPages button:hover {
-	background-color: rgb(6, 41, 183);
-	color: white;
-	cursor: pointer;
-} */
-
-/* page 404 */
 
 .container_page404 {
 	height: 50vh;

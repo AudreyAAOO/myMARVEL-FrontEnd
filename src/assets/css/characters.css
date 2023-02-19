@@ -16,7 +16,6 @@
 	background: linear-gradient(to right, #075fa4 0%, #000000 50%, #750516 100%);
 }
 
-/* carte personnage */
 .charactersCard {
 	/* border: 2px solid rgb(11, 40, 230); */
 	font-weight: 700;
@@ -25,10 +24,8 @@
 	line-height: 26px;
 	text-align: center;
 	margin: 15px 0;
-	/* grid-template-columns: repeat(4, 1fr);  */
 }
 
-/* titre + image+ description */
 .charactersCard article {
 	margin-top: 15px;
 	border: 1px solid #ee171f;
@@ -36,11 +33,9 @@
 	height: 260px;
 	padding: 8px;
 	background-color: #e6e6e6;
-	/* position: relative; */
 }
 
 .containerImgChar {
-	/* background-color: rgb(0, 0, 0); */
 	display: flex;
 	justify-content: center;
 }

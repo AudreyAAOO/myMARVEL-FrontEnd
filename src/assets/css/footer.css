@@ -2,20 +2,33 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
-	
 }
 
 .footer {
-	background-color: #ee171f;
+	background-image: url(https://res.cloudinary.com/dp28uacxh/image/upload/v1676826844/Stocks%20pour%20sites/Avengers_logo_gihfpp.png);
+	background-size: 100vw;
+	background-position-x: center;
+	background-position-y: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 70px;
+	height: 100px;
 	width: 100vw;
-    font-weight: 900;
+	font-size: 30px;
+	font-weight: 900;
+	color: white;
+	text-shadow: 2px 0 0 #065a9c, 2px 2px 0 #065a9c, 0 2px 0 #010e18,
+		-2px 2px 0 #010e18, -2px 0 0 #2a0208, -2px -2px 0 #2a0208, 0 -2px 0 #700515,
+		2px -2px 0 #700515;
+}
+
+.footer > a {
+	-webkit-text-stroke: 2px;
+	-webkit-text-stroke-color: rgb(0, 0, 0);
 }
 
 .footer > a:hover {
-
-color: rgb(6, 41, 183);
-} 
+	color: rgb(23, 0, 0);
+	text-shadow: 0 -1px 4px #fff, 0 -2px 10px #ff0, 0 -10px 20px #ff8000,
+		0 -18px 40px #f00;
+}

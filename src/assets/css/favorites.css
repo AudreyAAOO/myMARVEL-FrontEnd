@@ -13,16 +13,6 @@
 	);
 	background: linear-gradient(to right, #075fa4 0%, #000000 50%, #750516 100%);
 }
-/* .containerImg {
-    display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-    width: 100vw;
-    height: 210px;
-	background-color: rgb(12, 191, 24);
-    border: 5px solid rgb(23, 224, 255);
-} */
 
 .containerFavorites > img {
 	width: 80vw;
@@ -35,4 +25,5 @@
 	font-weight: 600;
 	color: white;
 	margin: 40px;
+
 }
