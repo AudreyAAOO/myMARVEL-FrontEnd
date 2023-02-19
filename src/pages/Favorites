@@ -12,7 +12,7 @@ import Search from "../components/Search";
 
 const Favorites = () => {
 
-	return  
+	return  (<p>hello</p>)
 
 
 

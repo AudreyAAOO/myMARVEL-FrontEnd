@@ -1,5 +1,5 @@
 
-import comicsByCharactersId from "../assets/css/comicsByCharactersId.css"
+import "../assets/css/comicsByCharactersId.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -30,7 +30,7 @@ const ComicsByCharactersId = () => {
 
                     `https://site--mymarvel--hw4gvwsxlwd5.code.run/comics/${characterId}`
                 );
-                console.log("(*＾▽＾)／ response.data: ", response.data);
+                // console.log("(*＾▽＾)／ response.data: ", response.data);
 
                 // Je stocke le résultat dans data
                 setData(response.data);
@@ -49,14 +49,14 @@ const ComicsByCharactersId = () => {
         <p>Loading ...!</p>
     ) : (<>
         <div className="container">
-
+ <h2>Retrouvez ce personnage dans les comics suivants :</h2>
             {data.comics.map((comicsByCharacters) => {
 
                 // console.log(comicsByCharacters);
                 return (<>
                     <div className="comicsCharCard">
                         <article key={comicsByCharacters._id}>
-                            <h2>Retrouvez ce personnage dans les comics suivants :</h2>
+                           
                             <div className="containerImgCC">
                                 <img
                                     src={displayImg(comicsByCharacters)}
@@ -83,7 +83,7 @@ const ComicsByCharactersId = () => {
 
 }
 
-export default comicsByCharactersId;
+export default ComicsByCharactersId;
 
 
 

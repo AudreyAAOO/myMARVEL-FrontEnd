@@ -12,7 +12,7 @@ import Characters from "./pages/Characters";
 import Comics from "./pages/Comics";
 import Page404 from './pages/Page404';
 import Favorites from "./pages/Favorites";
-
+import ComicsByCharactersId from "./pages/ComicsByCharactersId";
 
 // import des composants
 import Header from "./components/Header";
@@ -23,8 +23,6 @@ import Menu from "./components/Menu";
 // import des icones 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import ComicsByCharactersId from "./pages/ComicsByCharactersId";
-import Search from "./components/Search";
 library.add(faHeart);
 
 
