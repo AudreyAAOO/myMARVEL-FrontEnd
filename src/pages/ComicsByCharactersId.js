@@ -54,8 +54,8 @@ const ComicsByCharactersId = () => {
 
                 // console.log(comicsByCharacters);
                 return (<>
-                    <div className="ComicsCharCard">
-                        <article key={character._id}>
+                    <div className="comicsCharCard">
+                        <article key={comicsByCharacters._id}>
                             <h2>Retrouvez ce personnage dans les comics suivants :</h2>
                             <div className="containerImgCC">
                                 <img

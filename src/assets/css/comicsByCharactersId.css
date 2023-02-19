@@ -17,7 +17,7 @@
 }
 
 /* carte personnage */
-.ComicsCharCard {
+.comicsCharCard {
 	/* border: 2px solid rgb(11, 40, 230); */
 	font-weight: 700;
 	color: rgb(0, 0, 0);
@@ -29,7 +29,7 @@
 }
 
 /* titre + image+ description */
-.ComicsCharCard article {
+.comicsCharCard article {
 	margin-top: 15px;
 	border: 1px solid #ee171f;
 	width: 210px;
