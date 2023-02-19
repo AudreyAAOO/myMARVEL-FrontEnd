@@ -1,0 +1,53 @@
+.AppContainer {
+	font-family: "Josefin Sans", sans-serif;
+	font-family: "Overpass", sans-serif;
+}
+
+h1 {
+	font-weight: 700;
+	color: white;
+	font-size: 40px;
+}
+
+h2 {
+	font-size: 17px;
+	color: rgb(0, 0, 0);
+}
+
+h3 {
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+	margin: 20px;
+	font-weight: 700;
+	border-bottom: 1px solid white;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+.menuSearch {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: #e6e6e6;
+}
+
+.container_page404 {
+	height: 50vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 50px;
+	margin: 100px auto;
+	font-size: 30px;
+}
+.container_page404 > img {
+	width: 200px;
+}
+
+.checkPins {
+	background-color: rgb(232, 54, 84);
+}

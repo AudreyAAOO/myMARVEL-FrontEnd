@@ -3,7 +3,14 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: rgb(0, 0, 0);
+	background: -moz-linear-gradient(left, #075fa4 0%, #000000 50%, #750516 100%);
+	background: -webkit-linear-gradient(
+		left,
+		#075fa4 0%,
+		#000000 50%,
+		#750516 100%
+	);
+	background: linear-gradient(to right, #075fa4 0%, #000000 50%, #750516 100%);
 }
 
 .hero {
@@ -22,7 +29,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	-webkit-box-shadow: -4px 5px 51px 13px rgba(255, 255, 255, 0.94);
 	box-shadow: -4px 5px 51px 13px rgba(255, 255, 255, 0.94);
+
 }

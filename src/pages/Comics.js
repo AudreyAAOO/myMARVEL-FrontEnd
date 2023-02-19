@@ -1,137 +1,106 @@
 import "../assets/css/comics.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import des composants
 import Button from "../components/Button";
 import Search from "../components/Search";
-// { pins, handlepins }
+
+
 const Comics = () => {
-	const navigate = useNavigate();
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
-	const [searchCo, setSearchCo] = useState("");
-	const [pins, setPins] = useState([]);
-	// const params = useParams();
-	// const id = params.id;
-	// console.log("id", params);
+	const [search, setSearch] = useState("");
+	const [skip, setSkip] = useState(0);
+	const [limit] = useState(100);
+	const [isLastPage, setIsLastPage] = useState(false);
+
 
 	useEffect(() => {
-		console.log("---- useEffect executed ----  ");
-		// Je déclare la fonction qui fait la requête
+
 		const fetchData = async () => {
 			try {
 
 				const response = await axios.get(
-					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics?title=${searchCo}`);
-				console.log("(*＾▽＾)／ response.data: ", response.data);
-				// Je stocke le résultat dans data
-				setData(response.data);
+					`https://site--mymarvel--hw4gvwsxlwd5.code.run/comics?title=${search}&skip=${skip}&limit=${limit}`);
 
+				setData(response.data);
 				setIsLoading(false);
+				setIsLastPage(((response.data.count - (skip + limit)) <= 0 ? true : false));
 			} catch (error) {
 				console.log(error.message);
 			}
 		};
 
 		fetchData();
-	}, [searchCo]);
+	}, [search, skip, limit]);
 
-	// useEffect(() => {
-	// 	const pins = JSON.parse(localStorage.getItem('pins'));
-	// 	if (pins) {
-	// 		setPins(pins);
-	// 	}
-	// }, []);
 
-	// useEffect(() => {
-	// 	localStorage.setItem('pins', JSON.stringify(pins));
-	// }, [pins]);
+	let displayImg = (comics) => {
+		// eslint-disable-next-line
+		return comics.thumbnail.path + "/portrait_medium" + "." + comics.thumbnail.extension
+	};
+
 
 	const researchComics = (event) => {
-		//console.log(event.target.value);
-		setSearchCo(event.target.value);
-		console.log(searchCo);
+		setSearch(event.target.value);
+		setSkip(0);
 	}
-	const nextPage = () => {
 
-		// `characters?skip=${skip}&limit=${limit}
-		// navigate(`/`);
+	const nextPage = () => {
+		setSkip(skip + limit);
+
 	}
 
 	const prevPage = () => {
-		// navigate("/characters");
+		if ((skip - limit) > -1) {
+			setSkip(skip - limit);
+		}
 	}
-
-	const handlePins = () => {
-		const copy = [...pins]
-		copy.push({
-			name: 2
-});
-		setPins(copy);
-		console.log(pins);
-	}
-
-	// const handleFavorite = (comics) => {
-	// 	// console.log(event.target.value);
-	// 	// console.log("test");
-	// console.log(comics);
-	// 	handlepins("mypinsoritesComics", comics._id);
-
-	// 	console.log(handlepins);
-	// 	alert(pins);
-	// }
 
 	return isLoading ? (
 		<p>Loading ...!</p>
 	) : (<>
+
+		<div className="menuSearch">
+			<Search className="search" onChange={(event) => researchComics(event)} name="rechercher un comics" value={search} />
+
+			<div className="buttonsPages">
+				<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+				<Button className={isLastPage ? "noBtn" : "btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
+
+				{skip !== 1 && <p>page : {skip / 100}</p>}
+			</div>
+		</div>
+
 		<div className="container">
-			<div className="menu">
 
-				<Search className="searchCo" onChange={(event) => researchComics(event)} name="rechercher un comics" value={searchCo} />
 
-				<div className="buttonsPages">
-					<Button className="btnPrev" actionClick={() => prevPage()} name="page précédente" value="page précédente" />
-					<Button className="btnNext" actionClick={() => nextPage()} name="page suivante" value="page suivante" />
-				</div>
-			</div>
+			{data.results.sort(function (a, b) {
+				return a.title.localeCompare(b.title);
+			}).map((comics, i) => {
+				return (<>
+					<div key={comics._id} className="comicsCard">
 
-			<div className="comicsCard">
-				{data.results.sort(function (a, b) {
-					//   return a.title - b.title;
-					//   return a.title.localeCompare(b.title);
-				}).map((comics) => {
-					return (
-						<>
+						<article key={comics._id}>
+							<h2>{comics.title}</h2>
 
-							<article key={comics._id}>
+							<div key={comics._id} className="containerImgC">
+								{comics.thumbnail.path && (
+									<img src={displayImg(comics)} alt="couverture_comics" />)}
+							</div>
 
-								<h2>{comics.title}</h2>
-								{/* "/standard_xlarge" + */}
-								<div className="containerImg">
-									<img src={comics.thumbnail.path +
-										"." +
-										comics.thumbnail.extension
-									}
-										alt="personnage"
-									/>
-								</div>
+							<div key={i} className="containerDescription">
+								<p> {comics.description}</p>
 
-								<div className="containerDescription">
-									<p> {comics.description}</p>
-									<FontAwesomeIcon icon={["far", "heart"]}
-										onClick={handlePins}
-									/>
-								</div>
-							</article>
-
-						</>
-					);
-				})}
-			</div>
+								<FontAwesomeIcon className="heartIconComics" icon={["far", "heart"]} />
+							</div>
+						</article>
+					</div>
+				</>);
+			})}
 		</div >
 	</>);
 };

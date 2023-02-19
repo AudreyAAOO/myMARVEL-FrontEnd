@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Captain_Logo from "../assets/img/Captain_Logo.png";
 import Hulk_Logo from "../assets/img/Hulk_Logo.png";
 
-const Menu = ({ search }) => {
+const Menu = () => {
 	return (
 		<div className="containerMenu">
 			<span>
@@ -20,7 +20,7 @@ const Menu = ({ search }) => {
 				<img src={Hulk_Logo} alt="" />
 			</div>
 			<span>
-				<Link to={"/favoris"}>Favoris</Link>
+				<Link to={"/favorites"}>Favoris</Link>
 			</span>
 		</div>
 	);
