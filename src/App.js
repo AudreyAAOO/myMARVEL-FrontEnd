@@ -24,24 +24,17 @@ library.add(faHeart);
 
 
 function App() {
-  // function decode(str) {
-  //   let txt = new DOMParser().parseFromString(str, "text/html");
-  //   return txt.documentElement.textContent;
-  // }
-
-  // let encodedStr = "&lt;p&gt;";
-  // let decodedStr = decode(encodedStr);
-  // console.log(decodedStr);
 
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(100);
   const [pinsChar, setPinsChar] = useState(Cookies.get("myFavoritesChar") || []);
 
 
-  const handlePins = () => {
+  const handlePins = (character) => {
     if (pinsChar) {
       const copy = [...pinsChar];
-      setPinsChar(copy);
+      setPinsChar(copy.push(character.name));
+      console.log(pinsChar);
       Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
     } else {
       setPinsChar([]);
@@ -50,7 +43,7 @@ function App() {
   };
 
 
-  return (<>
+  return (<div className="AppContainer">
     <Router>
       <Header />
       <Menu />
@@ -64,7 +57,7 @@ function App() {
       <Footer />
     </Router>
 
-  </>);
+  </div>);
 }
 
 export default App;

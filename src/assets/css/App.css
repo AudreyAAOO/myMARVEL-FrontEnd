@@ -1,3 +1,8 @@
+.AppContainer {
+	font-family: "Josefin Sans", sans-serif;
+	font-family: "Overpass", sans-serif;
+}
+
 h1 {
 	font-weight: 700;
 	color: white;

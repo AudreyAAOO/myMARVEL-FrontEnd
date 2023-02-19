@@ -39,6 +39,7 @@ const Comics = () => {
 
 
 	let displayImg = (comics) => {
+		// eslint-disable-next-line
 		return comics.thumbnail.path + "/portrait_medium" + "." + comics.thumbnail.extension
 	};
 
@@ -79,7 +80,7 @@ const Comics = () => {
 
 			{data.results.sort(function (a, b) {
 				return a.title.localeCompare(b.title);
-			}).map((comics) => {
+			}).map((comics, i) => {
 				return (<>
 					<div key={comics._id} className="comicsCard">
 
@@ -91,7 +92,7 @@ const Comics = () => {
 									<img src={displayImg(comics)} alt="couverture_comics" />)}
 							</div>
 
-							<div className="containerDescription">
+							<div key={i} className="containerDescription">
 								<p> {comics.description}</p>
 
 								<FontAwesomeIcon className="heartIconComics" icon={["far", "heart"]} />

@@ -35,74 +35,77 @@ const Characters = ({ handlePins, setPinsChar, pinsChar }) => {
 	}, [searchC, skip, limit]);
 
 	let displayImg = (character) => {
+		// eslint-disable-next-line
 		return character.thumbnail.path + `/standard_xlarge` + "." + character.thumbnail.extension
 	};
 
-		const research = (e) => {
-			console.log(e.target.value);
-			setSearchC(e.target.value);
-			setSkip(0);
+	const research = (e) => {
+		console.log(e.target.value);
+		setSearchC(e.target.value);
+		setSkip(0);
+	}
+
+	const nextPage = () => {
+		setSkip(skip + limit);
+	}
+
+	const prevPage = () => {
+		if ((skip - limit) > -1) { // 100 - 100  = 0 > -1  
+			setSkip(skip - limit);
 		}
+	}
 
-		const nextPage = () => {
-			setSkip(skip + limit);
-		}
+	return isLoading ? (
+		<p>Loading ...!</p>
+	) : (<>
 
-		const prevPage = () => {
-			if ((skip - limit) > -1) { // 100 - 100  = 0 > -1  
-				setSkip(skip - limit);
-			}
-		}
+		<div className="menuSearch">
 
-		return isLoading ? (
-			<p>Loading ...!</p>
-		) : (<>
+			<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={searchC} />
 
-			<div className="menuSearch">
+			<div className="buttonsPages">
 
-				<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={searchC} />
+				<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
+				<Button className={isLastPage ? "noBtn" : "btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
 
-				<div className="buttonsPages">
+				{skip !== 1 && <p>page : {skip / 100}</p>}
 
-					<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
-					<Button className={isLastPage ? "noBtn" : "btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
-
-					{skip !== 1 && <p>page : {skip / 100}</p>}
-
-				</div>
 			</div>
+		</div>
 
-			<div className="container">
-				{data.results.map((character) => {
-					return (<>
-						<div className="charactersCard">
+		<div className="container">
+			{data.results.map((character, i) => {
+				return (<>
+					<div key={i} className="charactersCard">
 
-							<article key={character._id}>
-								<h2>{character.name}</h2>
-								<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
+						<article key={character._id}>
+							<h2>{character.name}</h2>
+							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
 
-									<div key={character._id} className="containerImgChar">
-										<img src={displayImg(character)} alt="personnage" key={character._id} />
-									</div>
-								</Link>
-
-								<div key={character._id} className="containerDescription">
-									<p key={character._id}>{character.description}</p>
-									<FontAwesomeIcon
-										className={pinsChar >= 1 ? "checkPins" : "heartIconCharacters"}
-										icon={["far", "heart"]}
-										onClick={() => {
-											console.log("pinschar", pinsChar);
-											handlePins(pinsChar.push(character.name));
-											Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
-										}} />
+								<div key={character._id} className="containerImgChar">
+									<img src={displayImg(character)} alt="personnage" key={character._id} />
 								</div>
-							</article>
-						</div>
-					</>)
-				})}
-			</div>
-		</>)
-	};
+							</Link>
 
-	export default Characters;
+							<div key={character._id} className="containerDescription">
+								<p key={character._id}>{character.description}</p>
+								<FontAwesomeIcon
+									// {pinsChar >= 1 ? "checkPins" : "heartIconCharacters"}
+									className="heartIconCharacters"
+									icon={["far", "heart"]}
+									onClick={() => {
+										console.log("pinsChar : ", pinsChar);
+										handlePins(character.name);
+										// handlePins(pinsChar.push(character.name));
+										Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
+									}} />
+							</div>
+						</article>
+					</div>
+				</>)
+			})}
+		</div>
+	</>)
+};
+
+export default Characters;

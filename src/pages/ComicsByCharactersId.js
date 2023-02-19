@@ -11,6 +11,7 @@ const ComicsByCharactersId = () => {
     const characterId = params.characterId;
 
     const displayImg = (comicsByCharacters) => {
+        // eslint-disable-next-line
         return comicsByCharacters.thumbnail.path + "/portrait_fantastic" + "." + comicsByCharacters.thumbnail.extension
     };
 
