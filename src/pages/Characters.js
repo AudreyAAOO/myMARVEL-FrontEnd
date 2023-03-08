@@ -1,19 +1,20 @@
 import "../assets/css/characters.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Cookies from "js-cookie";
+
+
 
 // import des composants
 import Button from "../components/Button";
 import Search from "../components/Search";
+import { CharacterCard } from "../components/CharacterCard";
 
 
 const Characters = () => {
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
+
 	const [searchC, setSearchC] = useState("");
 
 	//? gestion pagination
@@ -28,14 +29,7 @@ const Characters = () => {
 			: [])
 
 
-	const [isFavorite, setIsFavorite] = useState(false)   // ds le use effet vérifier si le character est ds les favoris
-
-	//! test pr afficher les cards
-
-
-
 	const handlePins = (charId) => {
-
 		const copy = [...pinsChar];
 		const result = copy.indexOf(charId)
 		if (result === -1) { //* si id n'est pas dans le tab des favoris
@@ -66,10 +60,6 @@ const Characters = () => {
 		fetchData();
 	}, [searchC, skip, limit]); // = surveiller ce qu'il yu ds le tableau de dépendance, si ces variables changent, il faut se réexecuter
 
-	let displayImg = (character) => {
-		// eslint-disable-next-line
-		return character.thumbnail.path + `/standard_xlarge` + "." + character.thumbnail.extension
-	};
 
 	const research = (e) => {
 		console.log(e.target.value);
@@ -107,37 +97,15 @@ const Characters = () => {
 
 
 		<div className="container">
-			{data.results.map((character, i) => {
-				const charId = character._id;
+			{data.results.map((character) => {
+
 				return (
 					// faire un composant character card et créer le state isFavorite dedans pr qu'il s'applique à chaque tour à chaque character (et non au 100 d'un coup.)
 					// Penser au use effect pour vérifier si le character est déjà ds les favoris (bien mettre if et ELSE)
 					// + surveiller l'état de use isfavorite ds le tableau de dépendance de useEffect (sinon erreur)
 					// faire une requête à notre backend pour aller chercher les infos sur les personnages favoris
 					// créer une route dans le backend qui va faire une requête à l'api pour aller chercher le character dans l'id est déjà ds les favoris/storage et qu'on veut réafficher.
-
-					<div key={i} className="charactersCard">
-
-						<article key={character._id}>
-							<h2>{character.name}</h2>
-							<Link character={character} to={`/comics/${character._id}`} characterid={character._id}>
-
-								<div key={character._id} className="containerImgChar">
-									<img src={displayImg(character)} alt="personnage" key={character._id} />
-								</div>
-							</Link>
-
-							<div key={character._id} className="containerDescription">
-								<p key={character._id}>{character.description}</p>
-								<FontAwesomeIcon
-									className={(isFavorite ? "redHeartIconCharacters" : "heartIconCharacters")}
-									icon={["far", "heart"]}
-									onClick={() => { handlePins(charId) }}
-
-								/>
-							</div>
-						</article>
-					</div>
+					<CharacterCard character={character} actionClick={() => handlePins()}  />
 				)
 			})}
 		</div>
