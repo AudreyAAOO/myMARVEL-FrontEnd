@@ -42,7 +42,7 @@ const Characters = () => {
 			console.log("else result: ", result, "copy: ", copy);
 		}
 		setPinsChar(copy);
-		console.log("PinsChar: ", pinsChar, "copy: ", copy);
+		console.log("PinsChar: ", pinsChar);
 
 	};
 
@@ -58,7 +58,7 @@ const Characters = () => {
 			}
 		};
 		fetchData();
-	}, [searchC, skip, limit]); // = surveiller ce qu'il yu ds le tableau de dépendance, si ces variables changent, il faut se réexecuter
+	}, [searchC, skip, limit]); // = surveiller ce qu'il y a ds le tableau de dépendance, si ces variables changent, il faut se réexecuter
 
 
 	const research = (e) => {
@@ -100,12 +100,8 @@ const Characters = () => {
 			{data.results.map((character) => {
 
 				return (
-					// faire un composant character card et créer le state isFavorite dedans pr qu'il s'applique à chaque tour à chaque character (et non au 100 d'un coup.)
-					// Penser au use effect pour vérifier si le character est déjà ds les favoris (bien mettre if et ELSE)
-					// + surveiller l'état de use isfavorite ds le tableau de dépendance de useEffect (sinon erreur)
-					// faire une requête à notre backend pour aller chercher les infos sur les personnages favoris
-					// créer une route dans le backend qui va faire une requête à l'api pour aller chercher le character dans l'id est déjà ds les favoris/storage et qu'on veut réafficher.
-					<CharacterCard character={character} actionClick={() => handlePins()}  />
+					//! mettre la key ici sinon erreur
+					<CharacterCard key={character._id} pinsChar={pinsChar} character={character} actionClick={() => handlePins()} />
 				)
 			})}
 		</div>

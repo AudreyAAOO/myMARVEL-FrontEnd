@@ -83,11 +83,11 @@
 }
 
 .redHeartIconCharacters {
-	color: rgb(224, 0, 0);
-	border: 1px solid white;
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(239, 34, 34);
 	padding: 3px;
 	border-radius: 50%;
-	background-color: white;
+	background-color: rgb(239, 34, 34);
 	position: absolute;
 	left: 180px;
 	top: -200px;
