@@ -34,8 +34,23 @@ const Characters = () => {
 
 
 
-	// const handlePins = () => {
-	// };
+	const handlePins = (charId) => {
+
+		const copy = [...pinsChar];
+		const result = copy.indexOf(charId)
+		if (result === -1) { //* si id n'est pas dans le tab des favoris
+			copy.push(charId);
+			localStorage.setItem('pins', JSON.stringify(copy));
+			console.log("if result: ", result, "copy: ", copy);
+		} else {
+			copy.splice(result, 1)
+			localStorage.removeItem(result);
+			console.log("else result: ", result, "copy: ", copy);
+		}
+		setPinsChar(copy);
+		console.log("PinsChar: ", pinsChar, "copy: ", copy);
+
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -93,6 +108,7 @@ const Characters = () => {
 
 		<div className="container">
 			{data.results.map((character, i) => {
+				const charId = character._id;
 				return (
 					// faire un composant character card et créer le state isFavorite dedans pr qu'il s'applique à chaque tour à chaque character (et non au 100 d'un coup.)
 					// Penser au use effect pour vérifier si le character est déjà ds les favoris (bien mettre if et ELSE)
@@ -116,24 +132,8 @@ const Characters = () => {
 								<FontAwesomeIcon
 									className={(isFavorite ? "redHeartIconCharacters" : "heartIconCharacters")}
 									icon={["far", "heart"]}
-									// onClick={(e) => handlePins(e)}
-									onClick={() => {
-										const charId = character._id;
-										const copy = [...pinsChar];
-										const result = copy.indexOf(charId)
-										if (result === -1) { //* si id n'est pas dans le tab des favoris
-											copy.push(charId);
-											localStorage.setItem('pins', JSON.stringify(copy));
-											console.log("if result: ", result, "copy: ", copy);
-										} else {
-											copy.splice(result, 1)
-											localStorage.removeItem(result);
-											console.log("else result: ", result, "copy: ", copy);
-										}
-										setPinsChar(copy);
-										console.log("PinsChar: ", pinsChar, "copy: ", copy);
-									}
-									}
+									onClick={() => { handlePins(charId) }}
+
 								/>
 							</div>
 						</article>
