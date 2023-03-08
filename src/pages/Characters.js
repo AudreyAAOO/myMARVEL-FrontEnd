@@ -19,28 +19,19 @@ const Characters = () => {
 	const [limit] = useState(100);
 	const [isLastPage, setIsLastPage] = useState(false);
 	const [pinsChar, setPinsChar] = useState([]);
+	const [isFavorite, setIsFavorite] = useState(false)
 
-
-	const handlePins = (character) => {
-	  console.log(character.name);
-	  // if (pinsChar) {
-	  //   const copy = [...pinsChar];
-	  //   setPinsChar(copy.push({ "nom": character.name }));
-	  //   // console.log("pinsChar: ", pinsChar);
-	  //   setPinsChar(JSON.stringify(copy, null, "-"));
-	  //   console.log("pinsChar: ", pinsChar);
-	  //   Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
-	  // } else {
-	  //   setPinsChar([]);
-	  //   Cookies.remove("myFavorites");
-	  // }
-	};
-	// JSON.stringify("\uD800"); // '"\\ud800"'  et encodage ??
-
-
+	// const handlePins = () => {
+	// 	const fav = { id: character._id, name: character.name };
+	// 	console.log("fav: ", fav);
+	// 	const copy = [...pinsChar];
+	// 	copy.push(fav);
+	// 	console.log("copy", copy);
+	// 	setPinsChar(copy);
+	// 	localStorage.setItem('pins', JSON.stringify(copy));
+	// };
 
 	useEffect(() => {
-
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}&skip=${skip}&limit=${limit}`);
@@ -110,10 +101,28 @@ const Characters = () => {
 							<div key={character._id} className="containerDescription">
 								<p key={character._id}>{character.description}</p>
 								<FontAwesomeIcon
-									// {pinsChar >= 1 ? "checkPins" : "heartIconCharacters"}
-									className="heartIconCharacters"
+									className={(isFavorite ? "redHeartIconCharacters" : "heartIconCharacters")}
 									icon={["far", "heart"]}
-									onClick={(character) => handlePins(character)} />
+									// onClick={(e) => handlePins(e)}
+									onClick={() => {
+										const fav = { id: character._id, name: character.name };
+										console.log("fav: ", fav);
+										const copy = [...pinsChar];
+										copy.push(fav);
+										console.log("copy", copy);
+										setPinsChar(copy);
+										localStorage.setItem('pins', JSON.stringify(copy));
+										setIsFavorite(!isFavorite);
+										if (!isFavorite) {
+											// localStorage.removeItem('pins');
+											const copy = [...pinsChar];
+											copy.pop(fav);
+											console.log("copy", copy);
+											setPinsChar(copy);
+										}
+									}}
+
+								/>
 							</div>
 						</article>
 					</div>
