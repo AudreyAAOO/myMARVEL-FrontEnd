@@ -3,32 +3,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Banniere_logos from "../assets/img/Banniere_logos.png";
 
 
-const Favorites = ({ pinsChar }) => {
+const Favorites = () => {
 
 
-	return pinsChar.length < 1 ? (<>
-		<div className="containerFavorites">
-			<img src={Banniere_logos} alt="banniere" />
+	return 
+	// pinsChar.length > 0 ? (
+	// 	<div className="containerFavorites">
+	// 		<img src={Banniere_logos} alt="banniere" />
 
-			<p>Votre collection est vide.</p>
-			<p>Sélectionnez vos items préférés en cliquant sur le <FontAwesomeIcon icon={["far", "heart"]} /></p>
-		</div>
+	// 		<p>Votre collection est vide.</p>
+	// 		<p>Sélectionnez vos items préférés en cliquant sur le <FontAwesomeIcon icon={["far", "heart"]} /></p>
+	// 	</div>
 
-	</>) : (<>
-		<div className="containerFavorites">
+	// ) : (
+	// 	<div className="containerFavorites">
 
-			<img src={Banniere_logos} alt="banniere" />
+	// 		<img src={Banniere_logos} alt="banniere" />
 
-			<h3>Mes super-héros préférés :</h3>
+	// 		<h3>Mes super-héros préférés :</h3>
 
-			{/* {pinsChar.map((item, index) => {
-				return (<p key={index}> {item}</p>)})} */}
+	// 		{/* {pinsChar.map((item, index) => {
+	// 			return (<p key={index}> {item}</p>)})} */}
 
-			<p> {pinsChar}</p>
+	// 		<p> {pinsChar}</p>
 
 
-		</div>
-	</>)
+	// 	</div>
+	// )
 };
 
 export default Favorites;

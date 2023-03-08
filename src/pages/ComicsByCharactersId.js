@@ -43,9 +43,9 @@ const ComicsByCharactersId = () => {
         <div className="container">
             <h3>Retrouvez ce personnage dans les comics suivants :</h3>
             {data.comics.map((comicsByCharacters) => {
-                return (<>
-                    <div className="comicsCharCard">
-                        <article key={comicsByCharacters._id}>
+                return (
+                    <div key={comicsByCharacters._id} className="comicsCharCard">
+                        <article >
                             <div className="containerImgCC">
                                 <img
                                     src={displayImg(comicsByCharacters)}
@@ -53,15 +53,15 @@ const ComicsByCharactersId = () => {
                                 />
                             </div>
                             <div className="containerDescriptionCard">
-                                <p>TITRE</p> 
+                                <p>TITRE</p>
                                 <p>{comicsByCharacters.title}</p>
-                                <p>DESCRIPTION</p> 
+                                <p>DESCRIPTION</p>
                                 <p>{comicsByCharacters.description}</p>
                                 <FontAwesomeIcon className="heartIconCC" icon={["far", "heart"]} />
                             </div>
                         </article>
                     </div>
-                </>)
+                )
             })}
             <h3><Link to={("/")}> Retourner sur la page d'acceuil</Link></h3>
         </div>
