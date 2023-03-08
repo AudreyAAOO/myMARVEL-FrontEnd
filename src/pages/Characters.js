@@ -10,7 +10,7 @@ import Button from "../components/Button";
 import Search from "../components/Search";
 
 
-const Characters = ({ handlePins, setPinsChar, pinsChar }) => {
+const Characters = () => {
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +18,26 @@ const Characters = ({ handlePins, setPinsChar, pinsChar }) => {
 	const [skip, setSkip] = useState(0);
 	const [limit] = useState(100);
 	const [isLastPage, setIsLastPage] = useState(false);
+	const [pinsChar, setPinsChar] = useState([]);
+
+
+	const handlePins = (character) => {
+	  console.log(character.name);
+	  // if (pinsChar) {
+	  //   const copy = [...pinsChar];
+	  //   setPinsChar(copy.push({ "nom": character.name }));
+	  //   // console.log("pinsChar: ", pinsChar);
+	  //   setPinsChar(JSON.stringify(copy, null, "-"));
+	  //   console.log("pinsChar: ", pinsChar);
+	  //   Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
+	  // } else {
+	  //   setPinsChar([]);
+	  //   Cookies.remove("myFavorites");
+	  // }
+	};
+	// JSON.stringify("\uD800"); // '"\\ud800"'  et encodage ??
+
+
 
 	useEffect(() => {
 
@@ -75,7 +95,7 @@ const Characters = ({ handlePins, setPinsChar, pinsChar }) => {
 
 		<div className="container">
 			{data.results.map((character, i) => {
-				return (<>
+				return (
 					<div key={i} className="charactersCard">
 
 						<article key={character._id}>
@@ -93,16 +113,11 @@ const Characters = ({ handlePins, setPinsChar, pinsChar }) => {
 									// {pinsChar >= 1 ? "checkPins" : "heartIconCharacters"}
 									className="heartIconCharacters"
 									icon={["far", "heart"]}
-									onClick={() => {
-										console.log("pinsChar : ", pinsChar);
-										handlePins(character.name);
-										// handlePins(pinsChar.push(character.name));
-										Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
-									}} />
+									onClick={(character) => handlePins(character)} />
 							</div>
 						</article>
 					</div>
-				</>)
+				)
 			})}
 		</div>
 	</>)

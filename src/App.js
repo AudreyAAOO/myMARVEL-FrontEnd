@@ -27,37 +27,23 @@ function App() {
 
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(100);
-  const [pinsChar, setPinsChar] = useState(Cookies.get("myFavoritesChar") || []);
 
 
-  const handlePins = (character) => {
-    if (pinsChar) {
-      const copy = [...pinsChar];
-      setPinsChar(copy.push(character.name));
-      console.log(pinsChar);
-      Cookies.set("myFavoritesChar", pinsChar, { expires: 666 });
-    } else {
-      setPinsChar([]);
-      Cookies.remove("myFavorites");
-    }
-  };
-
-
-  return (<div className="AppContainer">
-    <Router>
-      <Header />
-      <Menu />
-      <Routes>
-        <Route path="/" element={<Characters handlePins={handlePins} setPinsChar={setPinsChar} pinsChar={pinsChar} skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
-        <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
-        <Route path="/comics/:characterId" element={<ComicsByCharactersId />} />
-        <Route path="/favorites" element={<Favorites pinsChar={pinsChar} />} />
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-      <Footer />
-    </Router>
-
-  </div>);
+  return (
+    <div className="AppContainer">
+      <Router>
+        <Header />
+        <Menu />
+        <Routes>
+          <Route path="/" element={<Characters skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
+          <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
+          <Route path="/comics/:characterId" element={<ComicsByCharactersId />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </div>);
 }
 
 export default App;
