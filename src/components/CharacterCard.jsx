@@ -6,7 +6,6 @@ export const CharacterCard = ({ character, actionClick, pinsChar }) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	// ds le use effet vérifier si le character est ds les favoris
-
 	useEffect(() => {
 		const result = pinsChar.indexOf(character._id);
 		if (result === -1) {
@@ -36,7 +35,7 @@ export const CharacterCard = ({ character, actionClick, pinsChar }) => {
 			<article>
 				<h2>{character.name}</h2>
 				<Link
-					character={character}
+					// character={character}
 					to={`/comics/${character._id}`}
 					characterid={character._id}
 				>

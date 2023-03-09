@@ -7,7 +7,7 @@ import axios from "axios";
 // import des composants
 import Button from "../components/Button";
 import Search from "../components/Search";
-import { CharacterCard } from "../components/CharacterCard";
+import { CharacterCard } from "../components/CharacterCard";  //! ? 
 
 
 const Characters = () => {
@@ -29,20 +29,20 @@ const Characters = () => {
 			: [])
 
 
-	const handlePins = (charId) => {
+	const handlePins = (charId) => {				
 		const copy = [...pinsChar];
-		const result = copy.indexOf(charId)
-		if (result === -1) { //* si id n'est pas dans le tab des favoris
+		const indexID = copy.indexOf(charId)
+		if (indexID === -1) { //* si id n'est pas dans le tab des favoris
 			copy.push(charId);
 			localStorage.setItem('pins', JSON.stringify(copy));
-			console.log("if result: ", result, "copy: ", copy);
+			console.log("if indexID: ", indexID, "copy: ", copy);
 		} else {
-			copy.splice(result, 1)
-			localStorage.removeItem(result);
-			console.log("else result: ", result, "copy: ", copy);
+			copy.splice(indexID, 1)
+			localStorage.removeItem(indexID);
+			console.log("else indexID: ", indexID, "copy: ", copy);
 		}
 		setPinsChar(copy);
-		console.log("PinsChar: ", pinsChar);
+		// console.log("PinsChar: ", pinsChar);
 
 	};
 
@@ -83,7 +83,11 @@ const Characters = () => {
 
 		<div className="menuSearch">
 
-			<Search className="search" onChange={(e) => research(e)} name="rechercher un personnage" value={searchC} />
+			<Search
+				className="search"
+				onChange={(e) => research(e)}
+				name="rechercher un personnage"
+				value={searchC} />
 
 			<div className="buttonsPages">
 
@@ -98,10 +102,12 @@ const Characters = () => {
 
 		<div className="container">
 			{data.results.map((character) => {
-
+				const charId = character._id
+				// console.log(charId);
 				return (
 					//! mettre la key ici sinon erreur
-					<CharacterCard key={character._id} pinsChar={pinsChar} character={character} actionClick={() => handlePins()} />
+
+					<CharacterCard key={character._id} pinsChar={pinsChar} character={character} actionClick={() => handlePins(charId)} />
 				)
 			})}
 		</div>
