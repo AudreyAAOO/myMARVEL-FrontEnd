@@ -27,6 +27,15 @@ function App() {
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(100);
 
+	//! gestion des favoris
+	const [pinsChar, setPinsChar] = useState(
+		localStorage.getItem('pins')               // vérifier s'il y a qqch le storage
+			? JSON.parse(localStorage.getItem('pins')) // vérifier qu'il existe des datas avant de parser sinon erreur
+			: [])
+
+
+
+
 
   return (
     <div className="AppContainer">

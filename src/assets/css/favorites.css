@@ -1,9 +1,10 @@
-.containerFavorites {
+.containerFavCharactersCard {
+	border: 2px solid rgb(11, 40, 230);
+	width: 100vw;
 	display: flex;
-	justify-content: center;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 	align-items: center;
-	flex-direction: column;
-
 	background: -moz-linear-gradient(left, #075fa4 0%, #000000 50%, #750516 100%);
 	background: -webkit-linear-gradient(
 		left,
@@ -13,17 +14,42 @@
 	);
 	background: linear-gradient(to right, #075fa4 0%, #000000 50%, #750516 100%);
 }
-
-.containerFavorites > img {
-	width: 80vw;
-	object-fit: cover;
-    margin-top: 20px;
+.containerFavCharactersCard > h2 {
+	font-size: 18px;
+	font-weight: 600;
+	color: rgb(255, 255, 255);
+}
+.FavCharactersCard {
+	/* border: 2px solid #05ff05; */
+	max-width: 400px;
+	padding: 30px;
 }
 
+/* .containerFavoriteImgChar {
+	border: 2px solid #c9fb00;
+	max-width: 400px;
+	height: 600px;
+	
+} */
+
+.containerFavoriteImgChar > img {
+	/* border: 2px solid #ff5410; */
+	max-width: 399px;
+	height: 400px;
+	object-fit: cover;
+}
+
+.containerFavoriteImgChar > p {
+	/* border: 2px solid #ff5410; */
+	color: white;
+	font-size: 13px;
+	font-weight: 400;
+}
+
+/* si pas de favoris, afficher un message */
 .containerFavorites > p {
 	font-size: 16px;
 	font-weight: 600;
 	color: white;
 	margin: 40px;
-
 }

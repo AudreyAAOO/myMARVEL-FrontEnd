@@ -2,10 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const CharacterCard = ({ character, actionClick, pinsChar }) => {
+export const CharacterCard = ({ character }) => {
+	
 	const [isFavorite, setIsFavorite] = useState(false);
 
-	// ds le use effet vérifier si le character est ds les favoris
+	//! gestion des favoris
+	const [pinsChar, setPinsChar] = useState(
+		localStorage.getItem("pins") // vérifier s'il y a qqch le storage
+			? JSON.parse(localStorage.getItem("pins")) // vérifier qu'il existe des datas avant de parser sinon erreur
+			: []
+	);
+
+	const handlePins = (charId) => {
+		const copy = [...pinsChar];
+		const indexID = copy.indexOf(charId);
+		if (indexID === -1) {
+			//* si id n'est pas dans le tab des favoris
+			copy.push(charId);
+		} else {
+			copy.splice(indexID, 1);
+			console.log("else indexID: ", indexID, "copy: ", copy);
+		}
+
+		setPinsChar(copy); //modifier le tableau copy
+		localStorage.setItem("pins", JSON.stringify(copy)); // et après l’envoyer au localStorage
+	};
+
 	useEffect(() => {
 		const result = pinsChar.indexOf(character._id);
 		if (result === -1) {
@@ -28,7 +50,7 @@ export const CharacterCard = ({ character, actionClick, pinsChar }) => {
 		);
 	};
 
-	// const charId = character._id;
+	const charId = character._id;
 
 	return (
 		<div className="charactersCard">
@@ -56,8 +78,9 @@ export const CharacterCard = ({ character, actionClick, pinsChar }) => {
 							isFavorite ? "redHeartIconCharacters" : "heartIconCharacters"
 						}
 						icon={["far", "heart"]}
-						// onClick={() => {handlePins(charId);}}
-						onClick={actionClick}
+						// actionClick={() => handlePins(charId)}
+						onClick={() => handlePins(charId)}
+						// onClick={handlePins} //= Uncaught TypeError: Converting circular structure to JSON--> starting at object with constructor 'SVGPathElement'
 					/>
 				</div>
 			</article>
