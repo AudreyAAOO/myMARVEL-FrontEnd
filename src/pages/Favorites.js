@@ -18,9 +18,9 @@ const Favorites = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
-					// `https://lereacteur-marvel-api.herokuapp.com/characters/${characterId}?apiKey=${process.env.API_KEY_MARVEL}`
-					`https://127.0.0.1/characters/${characterId}?apiKey=${process.env.API_KEY_MARVEL}`
+					`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters/${characterId}`
 				);
+				console.log(response.data);
 				setData(response.data);
 				setIsLoading(false);
 			} catch (error) {
