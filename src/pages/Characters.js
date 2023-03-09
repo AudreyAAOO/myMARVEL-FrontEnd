@@ -29,18 +29,22 @@ const Characters = () => {
 			: [])
 
 
-	const handlePins = (charId) => {				
+	const handlePins = (charId) => {
 		const copy = [...pinsChar];
 		const indexID = copy.indexOf(charId)
 		if (indexID === -1) { //* si id n'est pas dans le tab des favoris
 			copy.push(charId);
+
 			localStorage.setItem('pins', JSON.stringify(copy));
-			console.log("if indexID: ", indexID, "copy: ", copy);
+			// console.log("if indexID: ", indexID, "copy: ", copy);
 		} else {
+
 			copy.splice(indexID, 1)
-			localStorage.removeItem(indexID);
+
+			localStorage.removeItem(copy);
 			console.log("else indexID: ", indexID, "copy: ", copy);
 		}
+		// setPinsChar(copy);
 		setPinsChar(copy);
 		// console.log("PinsChar: ", pinsChar);
 
@@ -48,6 +52,7 @@ const Characters = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
+			console.log("useEffect ok ");
 			try {
 				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}&skip=${skip}&limit=${limit}`);
 				setData(response.data);
@@ -58,7 +63,7 @@ const Characters = () => {
 			}
 		};
 		fetchData();
-	}, [searchC, skip, limit]); // = surveiller ce qu'il y a ds le tableau de dépendance, si ces variables changent, il faut se réexecuter
+	}, [searchC, skip, limit, pinsChar]); // = surveiller ce qu'il y a ds le tableau de dépendance, si ces variables changent, il faut se réexecuter
 
 
 	const research = (e) => {
