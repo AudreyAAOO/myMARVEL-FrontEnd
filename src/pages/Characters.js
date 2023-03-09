@@ -34,18 +34,23 @@ const Characters = () => {
 		const indexID = copy.indexOf(charId)
 		if (indexID === -1) { //* si id n'est pas dans le tab des favoris
 			copy.push(charId);
+			setPinsChar(copy);
 
-			localStorage.setItem('pins', JSON.stringify(copy));
 			// console.log("if indexID: ", indexID, "copy: ", copy);
 		} else {
-
 			copy.splice(indexID, 1)
 
-			localStorage.removeItem(copy);
+			//modifier le tableau copy 
+			// et après le if/else tu l’envoies au localStorage 
+			setPinsChar(copy);
+			// localStorage.removeItem(copy);
+
 			console.log("else indexID: ", indexID, "copy: ", copy);
 		}
+
+		localStorage.setItem('pins', JSON.stringify(copy));
 		// setPinsChar(copy);
-		setPinsChar(copy);
+
 		// console.log("PinsChar: ", pinsChar);
 
 	};
