@@ -11,33 +11,41 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.post(
-					`https://127.0.0.1/favoritesArray`,
-					{
-						pinsChar,
-					}
-				);
-				setData(response.data);
-				console.log(response.data);
-				setIsLoading(false);
-			} catch (error) {
-				console.log("error.response.data: ", error.response.data);
-			}
-		};
-		fetchData();
-	}, []);
+	if (pinsChar !== []) {
+		useEffect(() => {
+			const fetchData = async () => {
+				try {
 
-	//! passer en post le tableau d'objet
-	//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
+					const response = await axios.post(
+						//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
+						`http://localhost:3100/favorites`,
+						//? mettre http et non https sur postman aussi
+						{
+							pinsChar, //! passer en post le tableau d'objet
+						}
+
+
+
+
+					);
+					setData(response.data);
+					console.log(response.data);
+					setIsLoading(false);
+				} catch (error) {
+					console.log("error.response.data: ", error.response.data);
+				}
+			};
+			fetchData();
+		}, [pinsChar]);
+	}
+
+
 	// boucler dessus 
 	// fr une requete en front sur chaque tour de boucler
 	// vérifier longueur du tableau pr savoir si ya toutes les réponses
 
-	// si comics en plus , on peut faire une même route pr les characters et comics
-	// juste ajouter un body en plus
+	//TODO si comics en plus , on peut faire une même route pr les characters et comics
+	//TODO juste ajouter un body en plus
 
 
 
