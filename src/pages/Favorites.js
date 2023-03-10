@@ -13,30 +13,31 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 
 
 	useEffect(() => {
-		// if (pinsChar !== []) {
-		const fetchData = async () => {
-			try {
+		if (pinsChar !== []) {
+			const fetchData = async () => {
+				try {
 
-				const response = await axios.post(
-					//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
-					`http://localhost:3100/favorites`,
-					//? mettre http et non https sur postman aussi
-					{
-						pinsChar, //! passer en post le tableau d'objet
-					}
+					const response = await axios.post(
+						//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
+						`http://localhost:3100/favorites`,
+						//? mettre http et non https sur postman aussi
+						{
+							pinsChar, //! passer en post le tableau d'objet
+						}
+					);
 
-				);
+					setData(response.data);
+					console.log(response.data);
+					setIsLoading(false);
 
-				setData(response.data);
-				console.log(response.data);
-				setIsLoading(false);
-			} catch (error) {
-				console.log("error.response.data: ", error.response.data);
-				console.log("error.response: ", error.response);
-			}
-			// };
+				} catch (error) {
+					console.log("error.response.data: ", error.response.data);
+					console.log("error.response.data.message: ", error.response.data.message);
+				}
+			};
 			fetchData();
 		}
+
 	}, [pinsChar]);
 
 
