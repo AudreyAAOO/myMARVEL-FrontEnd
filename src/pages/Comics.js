@@ -78,9 +78,12 @@ const Comics = () => {
 		<div className="container">
 
 
-			{data.results.sort(function (a, b) {
-				return a.title.localeCompare(b.title);  //! ?
-			}).map((comics, i) => {
+			{data.results
+			// .sort(function (a, b) {
+			// 	return a.title
+			// 	.localeCompare(b.title);  //! ?
+			// })
+			.map((comics, i) => {
 				return (
 					<div key={comics._id} className="comicsCard">
 

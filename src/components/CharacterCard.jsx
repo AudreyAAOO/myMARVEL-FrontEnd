@@ -1,17 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const CharacterCard = ({ character }) => {
-	
-	const [isFavorite, setIsFavorite] = useState(false);
-
-	//! gestion des favoris
-	const [pinsChar, setPinsChar] = useState(
-		localStorage.getItem("pins") // vérifier s'il y a qqch le storage
-			? JSON.parse(localStorage.getItem("pins")) // vérifier qu'il existe des datas avant de parser sinon erreur
-			: []
-	);
+export const CharacterCard = ({ character, pinsChar, setPinsChar }) => {
 
 	const handlePins = (charId) => {
 		const copy = [...pinsChar];
@@ -28,16 +18,6 @@ export const CharacterCard = ({ character }) => {
 		localStorage.setItem("pins", JSON.stringify(copy)); // et après l’envoyer au localStorage
 	};
 
-	useEffect(() => {
-		const result = pinsChar.indexOf(character._id);
-		if (result === -1) {
-			//* si id n'est pas dans le tab des favoris
-			setIsFavorite(false);
-		} else {
-			setIsFavorite(true);
-		}
-	}, [isFavorite, character._id, pinsChar]);
-	//React Hook useEffect has missing dependencies: 'character._id' and 'pinsChar'
 
 	//! récupérer les images
 	let displayImg = (character) => {
@@ -50,17 +30,14 @@ export const CharacterCard = ({ character }) => {
 		);
 	};
 
-	const charId = character._id;
+	const charId = character._id; // pour le passer en props ds la fonction handleClick
+	const redHeart = pinsChar.indexOf(character._id) === -1;
 
 	return (
 		<div className="charactersCard">
 			<article>
 				<h2>{character.name}</h2>
-				<Link
-					// character={character}
-					to={`/comics/${character._id}`}
-					characterid={character._id}
-				>
+				<Link to={`/comics/${character._id}`} characterid={character._id}>
 					<div className="containerImgChar">
 						<img
 							src={displayImg(character)}
@@ -75,7 +52,7 @@ export const CharacterCard = ({ character }) => {
 
 					<FontAwesomeIcon
 						className={
-							isFavorite ? "redHeartIconCharacters" : "heartIconCharacters"
+							redHeart ? "heartIconCharacters" : "redHeartIconCharacters"
 						}
 						icon={["far", "heart"]}
 						// actionClick={() => handlePins(charId)}
