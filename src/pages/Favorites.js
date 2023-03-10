@@ -11,33 +11,34 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 
-	if (pinsChar !== []) {
-		useEffect(() => {
-			const fetchData = async () => {
-				try {
 
-					const response = await axios.post(
-						//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
-						`http://localhost:3100/favorites`,
-						//? mettre http et non https sur postman aussi
-						{
-							pinsChar, //! passer en post le tableau d'objet
-						}
+	useEffect(() => {
+		// if (pinsChar !== []) {
+		const fetchData = async () => {
+			try {
 
+				const response = await axios.post(
+					//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
+					`http://localhost:3100/favorites`,
+					//? mettre http et non https sur postman aussi
+					{
+						pinsChar, //! passer en post le tableau d'objet
+					}
 
+				);
 
-
-					);
-					setData(response.data);
-					console.log(response.data);
-					setIsLoading(false);
-				} catch (error) {
-					console.log("error.response.data: ", error.response.data);
-				}
-			};
+				setData(response.data);
+				console.log(response.data);
+				setIsLoading(false);
+			} catch (error) {
+				console.log("error.response.data: ", error.response.data);
+				console.log("error.response: ", error.response);
+			}
+			// };
 			fetchData();
-		}, [pinsChar]);
-	}
+		}
+	}, [pinsChar]);
+
 
 
 	// boucler dessus 
