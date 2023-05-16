@@ -4,7 +4,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Banniere_logos from "../assets/img/Banniere_logos.png";
 import { FavoriteCard } from "../components/FavoriteCard";
-import { RadarSpinner } from "react-epic-spinners";
+import { RadarSpinner } from "react-epic-spinners"; //yarn add react-epic-spinners puis si bug yarn add react-is
 
 const Favorites = ({ pinsChar, setPinsChar }) => {
 
@@ -22,7 +22,7 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 						`http://localhost:3100/favorites`,
 						//? mettre http et non https sur postman aussi
 						{
-							pinsChar, //! passer en post le tableau d'objet
+							pinsChar //! passer en post le tableau d'objet
 						}
 					);
 
@@ -34,6 +34,7 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 					console.log("error.response.data: ", error.response.data);
 					console.log("error.response.data.message: ", error.response.data.message);
 				}
+
 			};
 			fetchData();
 		}
@@ -67,11 +68,12 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 			) : (<>
 				<h2>Mes super-héros préférés:</h2>
 				{
-					pinsChar.map((item) => {
-						// console.log("item", item)
+					data.map((item) => {
+						// console.log("item", item._id)
+						// console.log("item", item.name)
 						return (
 							//! mettre la key ici sinon erreur
-							<FavoriteCard key={item} pinsId={item} pinsChar={pinsChar} setPinsChar={setPinsChar} />
+							<FavoriteCard key={item._id} pinsId={item} pinsChar={pinsChar} setPinsChar={setPinsChar} />
 						)
 					})}
 			</>)}

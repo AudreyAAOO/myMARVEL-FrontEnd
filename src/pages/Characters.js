@@ -1,7 +1,7 @@
 import "../assets/css/characters.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { RadarSpinner } from 'react-epic-spinners';
+import { RadarSpinner } from 'react-epic-spinners'; //yarn add react-epic-spinners puis si bug yarn add react-is
 
 // import des composants
 import Button from "../components/Button";
@@ -9,7 +9,7 @@ import Search from "../components/Search";
 import { CharacterCard } from "../components/CharacterCard";  //! ? 
 
 
-const Characters = ({pinsChar, setPinsChar}) => {
+const Characters = ({ pinsChar, setPinsChar }) => {
 
 	const [data, setData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +24,7 @@ const Characters = ({pinsChar, setPinsChar}) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-		
+
 			try {
 				const response = await axios.get(`https://site--mymarvel--hw4gvwsxlwd5.code.run/characters?name=${searchC}&skip=${skip}&limit=${limit}`);
 				setData(response.data);

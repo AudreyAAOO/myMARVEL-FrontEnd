@@ -1,10 +1,7 @@
 import "../assets/css/favorites.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 export const FavoriteCard = ({ pinsId, pinsChar, setPinsChar }) => {
-
-
 	const handlePins = (pinsId) => {
 		const copy = [...pinsChar];
 		const indexID = copy.indexOf(pinsId);
@@ -20,20 +17,22 @@ export const FavoriteCard = ({ pinsId, pinsChar, setPinsChar }) => {
 		localStorage.setItem("pins", JSON.stringify(copy)); // et après l’envoyer au localStorage
 	};
 
-
-	//! récupérer les images
+	//! récupérer les images //! error
 	let displayImg = (pinsId) => {
-		
 		return (
 			// eslint-disable-next-line
-			pinsId.thumbnail.path + `/standard_xlarge` + "." + pinsId.thumbnail.extension
+			pinsId.thumbnail.path +
+			`/standard_xlarge` +
+			"." +
+			pinsId.thumbnail.extension
 		);
 	};
 
 	const redHeart = pinsChar.indexOf(pinsId) === -1;
-	
-	return (<>
-					<div className="FavCharactersCard">
+
+	return (
+		<>
+			<div className="FavCharactersCard">
 				<article>
 					<h3>{pinsId.name}</h3>
 
