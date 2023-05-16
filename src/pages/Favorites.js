@@ -19,8 +19,10 @@ const Favorites = ({ pinsChar, setPinsChar }) => {
 
 					const response = await axios.post(
 						//! faire une nouvelle route et passer la liste des favoris (char, comics) en body
-						`http://localhost:3100/favorites`,
-						//? mettre http et non https sur postman aussi
+						// `http://localhost:3100/favorites`,
+						// ? mettre http et non https sur postman aussi
+						`https://site--mymarvel--hw4gvwsxlwd5.code.run/favorites`,
+
 						{
 							pinsChar //! passer en post le tableau d'objet
 						}
