@@ -1,9 +1,10 @@
-.containerFavorites {
+.containerFavCharactersCard {
+	border: 2px solid rgb(11, 40, 230);
+	width: 100vw;
 	display: flex;
-	justify-content: center;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 	align-items: center;
-	flex-direction: column;
-
 	background: -moz-linear-gradient(left, #075fa4 0%, #000000 50%, #750516 100%);
 	background: -webkit-linear-gradient(
 		left,
@@ -13,17 +14,77 @@
 	);
 	background: linear-gradient(to right, #075fa4 0%, #000000 50%, #750516 100%);
 }
-
-.containerFavorites > img {
-	width: 80vw;
-	object-fit: cover;
-    margin-top: 20px;
+.containerFavCharactersCard > h2 {
+	font-size: 18px;
+	font-weight: 600;
+	color: #ffffff;
+}
+.FavCharactersCard {
+	/* border: 2px solid #05ff05; */
+	max-width: 400px;
+	padding: 30px;
 }
 
+/* .containerFavoriteImgChar {
+	border: 2px solid #c9fb00;
+	max-width: 400px;
+	height: 600px;
+	
+} */
+
+.containerFavoriteImgChar > img {
+	/* border: 2px solid #ff5410; */
+	max-width: 399px;
+	height: 400px;
+	object-fit: cover;
+}
+
+.containerFavoriteImgChar > p {
+	/* border: 2px solid #ff5410; */
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 400;
+}
+
+/* si pas de favoris, afficher un message */
 .containerFavorites > p {
 	font-size: 16px;
 	font-weight: 600;
 	color: white;
 	margin: 40px;
+}
 
+.loadingRadarSpinner {
+	size: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 100px;
+}
+
+.heartIconCharacters {
+	color: rgb(0, 0, 0);
+	border: 1px solid white;
+	padding: 3px;
+	border-radius: 50%;
+	background-color: white;
+	position: absolute;
+	left: 180px;
+	top: -200px;
+}
+
+.heartIconCharacters:hover {
+	color: rgb(239, 34, 34);
+	cursor: grab;
+}
+
+.redHeartIconCharacters {
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(239, 34, 34);
+	padding: 3px;
+	border-radius: 50%;
+	background-color: rgb(239, 34, 34);
+	position: absolute;
+	left: 180px;
+	top: -200px;
 }

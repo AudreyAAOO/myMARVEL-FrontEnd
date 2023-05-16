@@ -1,7 +1,6 @@
 import "./assets/css/App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import Cookies from "js-cookie";
 
 
 // import des pages
@@ -28,6 +27,12 @@ function App() {
   const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(100);
 
+  //! gestion des favoris
+  const [pinsChar, setPinsChar] = useState(
+    localStorage.getItem('pins')               // vérifier s'il y a qqch le storage
+      ? JSON.parse(localStorage.getItem('pins')) // vérifier qu'il existe des datas avant de parser sinon erreur
+      : [])
+  //! à faire sur la page comics aussi et sur la page comicsById
 
   return (
     <div className="AppContainer">
@@ -35,10 +40,10 @@ function App() {
         <Header />
         <Menu />
         <Routes>
-          <Route path="/" element={<Characters skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
+          <Route path="/" element={<Characters pinsChar={pinsChar} setPinsChar={setPinsChar} skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
           <Route path="/comics" element={<Comics skip={skip} setSkip={setSkip} limit={limit} setLimit={setLimit} />} />
           <Route path="/comics/:characterId" element={<ComicsByCharactersId />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favorites" element={<Favorites pinsChar={pinsChar} setPinsChar={setPinsChar} />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
         <Footer />
