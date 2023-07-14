@@ -38,10 +38,10 @@ const Characters = ({ pinsChar, setPinsChar }) => {
 	}, [searchC, skip, limit]); // = surveiller ce qu'il y a ds le tableau de dépendance, si ces variables changent, il faut se réexecuter
 
 
-	//! améliorer la pagination = plutôt que partir de la dernière page (isLastPage) -> faire un state pour compter le nombre total de pages et on pourra afficher le nombre de page dynamiquement.
+	//! améliorer la pagination = plutôt que partir de la dernière page (isLastPage) 
+	//!   -> faire un state pour compter le nombre total de pages et on pourra afficher le nombre de page dynamiquement.
 
 	const research = (e) => {
-		// console.log(e.target.value);
 		setSearchC(e.target.value);
 		setSkip(0);
 	}
@@ -57,14 +57,12 @@ const Characters = ({ pinsChar, setPinsChar }) => {
 	}
 
 	return isLoading ? (
-		// <p>Loading ...!</p>
 		<div className="loadingRadarSpinner">
 			<RadarSpinner color="red" />
 		</div>
 	) : (<>
 
 		<div className="menuSearch">
-
 			<Search
 				className="search"
 				onChange={(e) => research(e)}
@@ -72,7 +70,6 @@ const Characters = ({ pinsChar, setPinsChar }) => {
 				value={searchC} />
 
 			<div className="buttonsPages">
-
 				<Button className={skip === 0 ? "noBtn" : "btnPrev"} actionClick={() => prevPage()} name="page précédente" value="page précédente" />
 				<Button className={isLastPage ? "noBtn" : "btnNext"} actionClick={() => nextPage()} name="page suivante" value="page suivante" />
 

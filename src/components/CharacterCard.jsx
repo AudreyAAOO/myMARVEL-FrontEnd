@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const CharacterCard = ({ character, pinsChar, setPinsChar }) => {
-
 	const handlePins = (charId) => {
 		const copy = [...pinsChar];
 		const indexID = copy.indexOf(charId);
@@ -10,14 +9,12 @@ export const CharacterCard = ({ character, pinsChar, setPinsChar }) => {
 			//* si id n'est pas dans le tab des favoris
 			copy.push(charId);
 		} else {
-			copy.splice(indexID, 1);
+			copy.splice(indexID); // , 1
 			console.log("else indexID: ", indexID, "copy: ", copy);
 		}
-
 		setPinsChar(copy); //modifier le tableau copy
 		localStorage.setItem("pins", JSON.stringify(copy)); // et après l’envoyer au localStorage
 	};
-
 
 	//! récupérer les images
 	let displayImg = (character) => {
