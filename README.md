@@ -4,7 +4,8 @@
 
 ### Initialisé avec Create-react-app
 
-à lancer avec $ yarn start, tout en lancant le [backend ici](https://github.com/AudreyAAOO/myMARVEL-Backend)
+à lancer avec $ yarn start, tout en lancant le [backend ici](https://github.com/AudreyAAOO/myMARVEL-Backend) \
+ou à visiter à l'adresse [https://my-marvel-awesome-website.netlify.app/](https://my-marvel-awesome-website.netlify.app/)
 
 ### Les + du projet : 
 - utilisation d'une API Marvel
