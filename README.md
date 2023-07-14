@@ -8,8 +8,9 @@
 
 ### Les + du projet : 
 - utilisation d'une API Marvel
-- bouton réutilisable et props neutres (Characters.jsx ligne 76)
+- boutons réutilisables et props neutres (Characters.jsx ligne 76)
 - système de pagination
+- barre de recherche
 - loader avec react-epic-spinners
 - gestion des favoris en localStorage et réaffichage de ceux-ci
  
