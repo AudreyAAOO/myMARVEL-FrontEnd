@@ -8,4 +8,4 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-![Screen_Marvel](/assets/img/Screen_Marvel.png "capture d'écran du projet")
+![Screen_Marvel](/src/assets/img/Screen_Marvel.png "capture d'écran du projet")
